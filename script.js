@@ -1,5 +1,5 @@
 // script.js
-
+window.onload = () => {
 const estadoRamos = {};
   // Primer semestre
   calculo_diferencial: {
@@ -427,4 +427,5 @@ window.onload = () => {
   });
   actualizarRamos();
   setTimeout(() => dibujarLineas(), 500);
+};
 };
