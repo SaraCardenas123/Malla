@@ -1,52 +1,3 @@
-/* estilos.css */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f0fa;
-  margin: 0;
-  padding: 2rem;
-  color: #2c1e4a;
-  overflow-x: auto;
-}
-
-h1 {
-  text-align: center;
-  color: #5f27cd;
-  margin-bottom: 2rem;
-}
-
-#malla {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 2rem;
-}
-
-.semestre {
-  background-color: #f7f2fc;
-  padding: 0.5rem;
-  border-radius: 10px;
-  border: 2px solid #e0d1f8;
-  min-width: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.semestre h2 {
-  font-size: 1.1rem;
-  color: #6b21a8;
-  margin-bottom: 0.5rem;
-}
-
-.contenedor-semestre {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
-
 .ramo {
   border: 2px solid #a076e8;
   border-radius: 10px;
@@ -55,7 +6,6 @@ h1 {
   transition: background-color 0.3s ease;
   text-align: center;
   opacity: 0.6;
-  background-color: #dcd0f7;
 }
 
 .ramo:hover {
