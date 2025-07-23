@@ -30,9 +30,20 @@ function actualizarRamos() {
     const elem = document.getElementById(id);
     const requisitos = data.prerequisitos;
     const aprobados = requisitos.every(req => estadoRamos[req]);
+
     if (aprobados || requisitos.length === 0) {
-      elem.classList.remove("bloqueado");
+      if (!elem.classList.contains("aprobado")) {
+        elem.classList.remove("bloqueado");
+      }
     } else {
+      elem.classList.remove("aprobado");
+      if (!elem.classList.contains("bloqueado")) {
+        elem.classList.add("bloqueado");
+      }
+      estadoRamos[id] = false;
+    }
+  });
+} else {
       elem.classList.remove("aprobado");
       elem.classList.add("bloqueado");
       estadoRamos[id] = false;
