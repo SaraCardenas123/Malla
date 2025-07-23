@@ -78,7 +78,7 @@ h1 {
 }
 
 /* Colores por componente */
-.fund { background-color: #e0f7fa; border-color: #26c6da; }
-.disc { background-color: #f3e5f5; border-color: #ab47bc; }
-.opt  { background-color: #fbe9e7; border-color: #ff7043; }
-.trab { background-color: #ede7f6; border-color: #7e57c2; }
+.fund { background-color: #e0f7fa !important; border-color: #26c6da !important; }
+.disc { background-color: #f3e5f5 !important; border-color: #ab47bc !important; }
+.opt  { background-color: #fbe9e7 !important; border-color: #ff7043 !important; }
+.trab { background-color: #ede7f6 !important; border-color: #7e57c2 !important; }
