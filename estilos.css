@@ -1,35 +1,62 @@
+/* estilos.css */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f5fc;
-  color: #333;
-  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f0fa;
+  margin: 0;
+  padding: 2rem;
+  color: #2c1e4a;
 }
 
 h1 {
   text-align: center;
-  color: #5e2b97;
+  color: #5f27cd;
+  margin-bottom: 2rem;
 }
 
-.malla {
+#malla {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 15px;
-  margin-top: 30px;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.semestre {
+  background-color: #f7f2fc;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid #e0d1f8;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.semestre h2 {
+  font-size: 1.1rem;
+  color: #6b21a8;
+  margin-bottom: 0.5rem;
+}
+
+.contenedor-semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .ramo {
-  border: 2px solid #a36fff;
-  background-color: #d8b4fe;
-  padding: 12px;
+  background-color: #dcd0f7;
+  border: 2px solid #a076e8;
   border-radius: 10px;
+  padding: 0.6rem;
   cursor: pointer;
-  transition: 0.3s;
-  user-select: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
   opacity: 0.6;
 }
 
 .ramo:hover {
-  background-color: #c084fc;
+  background-color: #b892f0;
 }
 
 .ramo.aprobado {
@@ -37,11 +64,12 @@ h1 {
   color: white;
   border-color: #4c1d95;
   opacity: 1;
+  text-decoration: line-through;
 }
 
 .ramo.bloqueado {
+  opacity: 0.3;
   background-color: #e9d5ff;
   border-style: dashed;
   cursor: not-allowed;
 }
-
