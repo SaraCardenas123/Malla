@@ -356,7 +356,9 @@ const ramos = {
     semestre: 10,
     prerequisitos: [],
     componente: "disc"
-  },
+  }
+};
+
 const lineas = [];
 
 function crearRamo(id, data) {
