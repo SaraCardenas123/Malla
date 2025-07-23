@@ -85,3 +85,13 @@ h1 {
   pointer-events: none;
   filter: grayscale(100%);
 }
+#malla {
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.fila {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+}
