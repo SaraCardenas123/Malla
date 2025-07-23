@@ -1,6 +1,6 @@
 // script.js
 
-const ramos = {
+const estadoRamos = {};
   // Primer semestre
   calculo_diferencial: {
     nombre: "Cálculo Diferencial",
