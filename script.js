@@ -1,360 +1,225 @@
+const estadoRamos = {};
+
 const ramos = {
-  calculo_diferencial: {
-    nombre: "Cálculo Diferencial",
-    creditos: 4,
-    semestre: 1,
-    prerequisitos: [],
-    componente: "fund"
+  "Cálculo Diferencial": {
+    semestre: 1, creditos: 4, prerequisitos: [],
+    desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General"]
   },
-  sociologia: {
-    nombre: "Sociología especial: industrial y del trabajo",
-    creditos: 3,
-    semestre: 1,
-    prerequisitos: [],
-    componente: "disc"
+  "Sociología especial: industrial y del trabajo": {
+    semestre: 1, creditos: 3, prerequisitos: []
   },
-  introduccion: {
-    nombre: "Introducción a la Ingeniería Industrial",
-    creditos: 3,
-    semestre: 1,
-    prerequisitos: [],
-    componente: "fund"
+  "Introducción a la Ingeniería Industrial": {
+    semestre: 1, creditos: 3, prerequisitos: [],
+    desbloquea: ["Taller de Herramientas y Problemas", "Economía General"]
   },
-  programacion: {
-    nombre: "Programación de Computadores",
-    creditos: 3,
-    semestre: 1,
-    prerequisitos: [],
-    componente: "fund"
+  "Programación de Computadores": {
+    semestre: 1, creditos: 3, prerequisitos: [],
+    desbloquea: ["Programación Orientada a Objetos"]
   },
-  calculo_integral: {
-    nombre: "Cálculo Integral",
-    creditos: 4,
-    semestre: 2,
-    prerequisitos: ["calculo_diferencial"],
-    componente: "fund"
+  "Cálculo Integral": {
+    semestre: 2, creditos: 4, prerequisitos: ["Cálculo Diferencial"],
+    desbloquea: ["Cálculo en Varias Variables", "Fundamentos de Electricidad y Magnetismo", "Ecuaciones Diferenciales", "Probabilidad Fundamental"]
   },
-  algebra_lineal: {
-    nombre: "Álgebra Lineal",
-    creditos: 3,
-    semestre: 2,
-    prerequisitos: ["calculo_diferencial"],
-    componente: "fund"
+  "Álgebra Lineal": {
+    semestre: 2, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
+    desbloquea: ["Ecuaciones Diferenciales", "Optimización"]
   },
-  taller_invencion: {
-    nombre: "Taller de Invención y Creatividad",
-    creditos: 2,
-    semestre: 2,
-    prerequisitos: [],
-    componente: "disc"
+  "Taller de Invención y Creatividad": {
+    semestre: 2, creditos: 2, prerequisitos: [],
+    desbloquea: ["Gestión Empresarial"]
   },
-  poo: {
-    nombre: "Programación Orientada a Objetos",
-    creditos: 3,
-    semestre: 2,
-    prerequisitos: ["programacion"],
-    componente: "fund"
+  "Programación Orientada a Objetos": {
+    semestre: 2, creditos: 3, prerequisitos: ["Programación de Computadores"],
+    desbloquea: ["Taller de Herramientas y Problemas"]
   },
-  libre_2: {
-    nombre: "Libre elección",
-    creditos: 2,
-    semestre: 2,
-    prerequisitos: [],
-    componente: "opt"
+  "Libre elección 1": {
+    semestre: 2, creditos: 2, prerequisitos: []
   },
-  calculo_varias: {
-    nombre: "Cálculo en Varias Variables",
-    creditos: 4,
-    semestre: 3,
-    prerequisitos: ["calculo_integral"],
-    componente: "fund"
+  "Cálculo en Varias Variables": {
+    semestre: 3, creditos: 4, prerequisitos: ["Cálculo Integral"],
+    desbloquea: ["Ingeniería Económica y Análisis de Riesgo", "Optimización", "Modelos y Simulación"]
   },
-  mecanica: {
-    nombre: "Fundamentos de Mecánica",
-    creditos: 3,
-    semestre: 3,
-    prerequisitos: ["calculo_diferencial"],
-    componente: "disc"
+  "Fundamentos de Mecánica": {
+    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
+    desbloquea: ["Taller Ciencia y Tecnología Materiales"]
   },
-  economia: {
-    nombre: "Economía General",
-    creditos: 3,
-    semestre: 3,
-    prerequisitos: ["introduccion"],
-    componente: "disc"
+  "Economía General": {
+    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial"],
+    desbloquea: ["Gestión Empresarial"]
   },
-  taller_herramientas: {
-    nombre: "Taller de Herramientas y Problemas",
-    creditos: 2,
-    semestre: 3,
-    prerequisitos: ["introduccion", "calculo_diferencial", "poo"],
-    componente: "disc"
+  "Taller de Herramientas y Problemas": {
+    semestre: 3, creditos: 2, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial", "Programación Orientada a Objetos"],
+    desbloquea: ["Sistema de Costos", "Modelos y Simulación"]
   },
-  probabilidad: {
-    nombre: "Probabilidad Fundamental",
-    creditos: 3,
-    semestre: 3,
-    prerequisitos: ["calculo_integral"],
-    componente: "fund"
+  "Probabilidad Fundamental": {
+    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Integral"],
+    desbloquea: ["Modelos y Simulación", "Inferencia Estadística Fundamental"]
   },
-  ecuaciones: {
-    nombre: "Ecuaciones Diferenciales",
-    creditos: 3,
-    semestre: 4,
-    prerequisitos: ["calculo_integral", "algebra_lineal"],
-    componente: "fund"
+  "Ecuaciones Diferenciales": {
+    semestre: 4, creditos: 3, prerequisitos: ["Álgebra Lineal", "Cálculo Integral"],
+    desbloquea: ["Modelos y Simulación"]
   },
-  electricidad: {
-    nombre: "Fundamentos de Electricidad y Magnetismo",
-    creditos: 3,
-    semestre: 4,
-    prerequisitos: ["calculo_integral"],
-    componente: "disc"
+  "Fundamentos de Electricidad y Magnetismo": {
+    semestre: 4, creditos: 3, prerequisitos: ["Cálculo Integral"],
+    desbloquea: ["Seguridad Industrial"]
   },
-  costos: {
-    nombre: "Sistema de Costos",
-    creditos: 3,
-    semestre: 4,
-    prerequisitos: ["taller_herramientas"],
-    componente: "disc"
+  "Sistema de Costos": {
+    semestre: 4, creditos: 3, prerequisitos: ["Taller de Herramientas y Problemas"],
+    desbloquea: ["Ingeniería Económica y Análisis de Riesgo"]
   },
-  gestion: {
-    nombre: "Gestión Empresarial",
-    creditos: 3,
-    semestre: 4,
-    prerequisitos: ["economia", "taller_invencion"],
-    componente: "disc"
+  "Gestión Empresarial": {
+    semestre: 4, creditos: 3, prerequisitos: ["Taller de Invención y Creatividad", "Economía General"]
   },
-  taller_materiales: {
-    nombre: "Taller Ciencia y Tecnología Materiales",
-    creditos: 2,
-    semestre: 4,
-    prerequisitos: ["mecanica"],
-    componente: "disc"
+  "Taller Ciencia y Tecnología Materiales": {
+    semestre: 4, creditos: 2, prerequisitos: ["Fundamentos de Mecánica"],
+    desbloquea: ["Taller de Procesos Químicos y Biotecnológicos"]
   },
-  modelos: {
-    nombre: "Modelos y Simulación",
-    creditos: 3,
-    semestre: 5,
-    prerequisitos: ["probabilidad", "taller_herramientas", "ecuaciones", "calculo_varias"],
-    componente: "disc"
+  "Modelos y Simulación": {
+    semestre: 5, creditos: 4, prerequisitos: ["Cálculo en Varias Variables", "Taller de Herramientas y Problemas", "Ecuaciones Diferenciales", "Probabilidad Fundamental"],
+    desbloquea: ["Modelos Estocásticos", "Taller Simulación Procesos"]
   },
-  optimizacion: {
-    nombre: "Optimización",
-    creditos: 3,
-    semestre: 5,
-    prerequisitos: ["algebra_lineal", "calculo_varias"],
-    componente: "fund"
+  "Optimización": {
+    semestre: 5, creditos: 3, prerequisitos: ["Álgebra Lineal", "Cálculo en Varias Variables"],
+    desbloquea: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"]
   },
-  ingenieria_economica: {
-    nombre: "Ing. Económica y Análisis de Riesgo",
-    creditos: 3,
-    semestre: 5,
-    prerequisitos: ["costos", "calculo_varias"],
-    componente: "disc"
+  "Ingeniería Económica y Análisis de Riesgo": {
+    semestre: 5, creditos: 3, prerequisitos: ["Sistema de Costos", "Cálculo en Varias Variables"],
+    desbloquea: ["Finanzas"]
   },
-  taller_quimica: {
-    nombre: "Taller de Procesos Químicos y Biotecnológicos",
-    creditos: 2,
-    semestre: 5,
-    prerequisitos: ["taller_materiales"],
-    componente: "disc"
+  "Taller de Procesos Químicos y Biotecnológicos": {
+    semestre: 5, creditos: 2, prerequisitos: ["Taller Ciencia y Tecnología Materiales"]
   },
-  taller_metal: {
-    nombre: "Taller Procesos Metalmecánicos",
-    creditos: 2,
-    semestre: 5,
-    prerequisitos: [],
-    componente: "disc"
+  "Taller de Procesos Metalmecánicos": {
+    semestre: 5, creditos: 2, prerequisitos: [],
+    desbloquea: ["Taller Ergonomía e Ingeniería de Métodos"]
   },
-  inferencia: {
-    nombre: "Inferencia Estadística Fundamental",
-    creditos: 3,
-    semestre: 5,
-    prerequisitos: ["probabilidad"],
-    componente: "fund"
+  "Inferencia Estadística Fundamental": {
+    semestre: 5, creditos: 3, prerequisitos: ["Probabilidad Fundamental"],
+    desbloquea: ["Control y Gestión Calidad", "Modelos Estocásticos", "Taller Metodología Investigación"]
   },
-  modelos_estocasticos: {
-    nombre: "Modelos Estocásticos",
-    creditos: 3,
-    semestre: 6,
-    prerequisitos: ["modelos", "optimizacion", "inferencia"],
-    componente: "disc"
+  "Modelos Estocásticos": {
+    semestre: 6, creditos: 3, prerequisitos: ["Modelos y Simulación", "Optimización", "Inferencia Estadística Fundamental"],
+    desbloquea: ["Taller Simulación Procesos", "Taller Ingeniería de Producción"]
   },
-  gerencia_proyectos: {
-    nombre: "Gerencia y Gestión de Proyectos",
-    creditos: 3,
-    semestre: 6,
-    prerequisitos: [],
-    componente: "disc"
+  "Gerencia y Gestión de Proyectos": {
+    semestre: 6, creditos: 3, prerequisitos: [],
+    desbloquea: ["Sistemas de Información"]
   },
-  finanzas: {
-    nombre: "Finanzas",
-    creditos: 3,
-    semestre: 6,
-    prerequisitos: ["ingenieria_economica"],
-    componente: "disc"
+  "Finanzas": {
+    semestre: 6, creditos: 3, prerequisitos: ["Ingeniería Económica y Análisis de Riesgo"]
   },
-  taller_ergonomia: {
-    nombre: "Taller Ergonomía e Ing. Métodos",
-    creditos: 3,
-    semestre: 6,
-    prerequisitos: ["optimizacion", "taller_metal"],
-    componente: "disc"
+  "Taller Ergonomía e Ingeniería de Métodos": {
+    semestre: 6, creditos: 2, prerequisitos: ["Optimización", "Taller de Procesos Metalmecánicos"],
+    desbloquea: ["Taller Ingeniería de Producción"]
   },
-  calidad: {
-    nombre: "Control y Gestión de Calidad",
-    creditos: 3,
-    semestre: 6,
-    prerequisitos: ["inferencia"],
-    componente: "disc"
+  "Control y Gestión Calidad": {
+    semestre: 6, creditos: 3, prerequisitos: ["Inferencia Estadística Fundamental"]
   },
-  taller_simulacion: {
-    nombre: "Taller Simulación Procesos",
-    creditos: 3,
-    semestre: 7,
-    prerequisitos: ["modelos_estocasticos"],
-    componente: "disc"
+  "Taller Simulación Procesos": {
+    semestre: 7, creditos: 2, prerequisitos: ["Modelos Estocásticos"],
+    desbloquea: ["Logística"]
   },
-  sistemas_info: {
-    nombre: "Sistemas de Información",
-    creditos: 3,
-    semestre: 7,
-    prerequisitos: ["gerencia_proyectos"],
-    componente: "disc"
+  "Sistemas de Información": {
+    semestre: 7, creditos: 3, prerequisitos: ["Gerencia y Gestión de Proyectos"],
+    desbloquea: ["Taller Diseño Plantas", "Gestión Tecnológica"]
   },
-  seguridad: {
-    nombre: "Seguridad Industrial",
-    creditos: 2,
-    semestre: 7,
-    prerequisitos: ["electricidad"],
-    componente: "disc"
+  "Seguridad Industrial": {
+    semestre: 7, creditos: 2, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
+    desbloquea: ["Taller Diseño Plantas"]
   },
-  taller_produccion: {
-    nombre: "Taller de Ingeniería de la Producción",
-    creditos: 3,
-    semestre: 7,
-    prerequisitos: ["modelos_estocasticos", "taller_ergonomia"],
-    componente: "disc"
+  "Taller Ingeniería de Producción": {
+    semestre: 7, creditos: 3, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
+    desbloquea: ["Taller Diseño Plantas"]
   },
-  logistica: {
-    nombre: "Logística",
-    creditos: 3,
-    semestre: 8,
-    prerequisitos: ["taller_simulacion"],
-    componente: "disc"
+  "Logística": {
+    semestre: 8, creditos: 3, prerequisitos: ["Taller Simulación Procesos"]
   },
-  gestion_tecnologica: {
-    nombre: "Gestión Tecnológica",
-    creditos: 3,
-    semestre: 8,
-    prerequisitos: ["sistemas_info"],
-    componente: "disc"
+  "Gestión Tecnológica": {
+    semestre: 8, creditos: 2, prerequisitos: ["Sistemas de Información"]
   },
-  recursos_humanos: {
-    nombre: "Gerencia de Recursos Humanos",
-    creditos: 2,
-    semestre: 8,
-    prerequisitos: [],
-    componente: "disc"
+  "Gerencia de Recursos Humanos": {
+    semestre: 8, creditos: 3, prerequisitos: []
   },
-  taller_plantas: {
-    nombre: "Taller de Diseño de Plantas",
-    creditos: 3,
-    semestre: 8,
-    prerequisitos: ["sistemas_info", "taller_produccion", "seguridad"],
-    componente: "disc"
+  "Taller Diseño Plantas": {
+    semestre: 8, creditos: 3, prerequisitos: ["Taller Ingeniería de Producción", "Seguridad Industrial", "Sistemas de Información"]
   },
-  libre_9: {
-    nombre: "Libre elección",
-    creditos: 2,
-    semestre: 9,
-    prerequisitos: [],
-    componente: "opt"
+  "Libre elección 2": {
+    semestre: 8, creditos: 2, prerequisitos: []
   },
-  libre_10: {
-    nombre: "Libre elección",
-    creditos: 2,
-    semestre: 10,
-    prerequisitos: [],
-    componente: "opt"
+  "Libre elección 3": {
+    semestre: 9, creditos: 2, prerequisitos: []
   },
-  trabajo_grado: {
-    nombre: "Trabajo de Grado",
-    creditos: 5,
-    semestre: 10,
-    prerequisitos: [],
-    componente: "trab"
+  "Libre elección 4": {
+    semestre: 9, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 5": {
+    semestre: 9, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 6": {
+    semestre: 9, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 7": {
+    semestre: 10, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 8": {
+    semestre: 10, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 9": {
+    semestre: 10, creditos: 2, prerequisitos: []
+  },
+  "Libre elección 10": {
+    semestre: 10, creditos: 2, prerequisitos: []
+  },
+  "Trabajo de grado": {
+    semestre: 10, creditos: 5, prerequisitos: []
   }
 };
 
-const lineas = [];
-const estadoRamos = {};
-
-function crearRamo(id, data) {
+function crearCaja(nombre, datos) {
   const div = document.createElement("div");
-  div.className = `ramo bloqueado ${data.componente}`;
-  div.id = id;
-  div.innerHTML = `<strong>${data.nombre}</strong><br><small>${data.creditos} créditos</small>`;
+  div.className = "ramo bloqueado";
+  div.id = nombre;
+  div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
+  estadoRamos[nombre] = false;
+
+  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  if (container) container.appendChild(div);
+
+  if (datos.prerequisitos.length === 0) {
+    div.classList.remove("bloqueado");
+  }
+
   div.onclick = () => {
-    if (!div.classList.contains("bloqueado")) {
-      div.classList.toggle("aprobado");
-      estadoRamos[id] = div.classList.contains("aprobado");
-      actualizarRamos();
-    }
+    if (estadoRamos[nombre]) return;
+
+    estadoRamos[nombre] = true;
+    div.classList.add("aprobado");
+
+    Object.entries(ramos).forEach(([destino, datosDestino]) => {
+      if (
+        !estadoRamos[destino] &&
+        datosDestino.prerequisitos.every((pre) => estadoRamos[pre])
+      ) {
+        const destDiv = document.getElementById(destino);
+        destDiv.classList.remove("bloqueado");
+      }
+    });
   };
-  return div;
-}
-
-function actualizarRamos() {
-  Object.entries(ramos).forEach(([id, data]) => {
-    const elem = document.getElementById(id);
-    const requisitos = data.prerequisitos;
-    const aprobados = requisitos.every(req => estadoRamos[req]);
-
-    if (aprobados || requisitos.length === 0) {
-      if (!elem.classList.contains("aprobado")) {
-        elem.classList.remove("bloqueado");
-      }
-    } else {
-      elem.classList.remove("aprobado");
-      if (!elem.classList.contains("bloqueado")) {
-        elem.classList.add("bloqueado");
-      }
-      estadoRamos[id] = false;
-    }
-  });
-}
-
-//function dibujarLineas() {
-//  lineas.forEach(line => line.remove());
-//  lineas.length = 0;
-
-//  Object.entries(ramos).forEach(([id, data]) => {
-//    data.prerequisitos.forEach(prereq => {
-//      const desde = document.getElementById(prereq);
-//      const hasta = document.getElementById(id);
-//      if (desde && hasta) {
- //       const linea = new LeaderLine(desde, hasta, {
- //         color: '#999',
- //         size: 2,
-  //        path: 'straight',
-//          startPlug: 'disc',
-//          endPlug: 'arrow1'
- //       });
-//      lineas.push(linea);
-//      }
-//    });
-//  });
 }
 
 window.onload = () => {
-  Object.entries(ramos).forEach(([id, data]) => {
-    estadoRamos[id] = false;
-    const div = crearRamo(id, data);
-    const contenedor = document.querySelector(`#semestre${data.semestre} .contenedor-semestre`);
-    if (contenedor) contenedor.appendChild(div);
+  Object.entries(ramos).forEach(([nombre, datos]) => {
+    crearCaja(nombre, datos);
   });
-  actualizarRamos();
-  setTimeout(() => dibujarLineas(), 500);
+
+  // Líneas desactivadas
+  // Object.entries(ramos).forEach(([nombre, datos]) => {
+  //   datos.prerequisitos.forEach(prerrequisito => {
+  //     const start = document.getElementById(prerrequisito);
+  //     const end = document.getElementById(nombre);
+  //     if (start && end) {
+  //       new LeaderLine(start, end, { color: '#999', size: 2, path: 'straight' });
+  //     }
+  //   });
+  // });
 };
