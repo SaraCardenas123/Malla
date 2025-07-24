@@ -25,7 +25,7 @@ const ramos = {
     desbloquea: ["Ecuaciones Diferenciales", "Optimización"]
   },
   "Taller de Invención y Creatividad": {
-    semestre: 2, creditos: 2, prerequisitos: ["Introducción a la Ingenieria Industrial"],
+    semestre: 2, creditos: 2, prerequisitos: ["Introducción a la Ingeniería Industrial"],
     desbloquea: ["Gestión Empresarial"]
   },
   "Programación Orientada a Objetos": {
