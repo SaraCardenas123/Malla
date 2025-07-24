@@ -10,7 +10,7 @@ const ramos = {
     semestre: 1, creditos: 3, prerequisitos: []
   },
   // (continúa con los demás como ya los tienes)
-};
+}; 
 
 function crearCaja(nombre, datos) {
   const div = document.createElement("div");
