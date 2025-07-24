@@ -206,4 +206,5 @@ window.onload = () => {
   Object.entries(ramos).forEach(([nombre, datos]) => {
     crearCaja(nombre, datos);
   });
+    desbloquearRamos();
 };
