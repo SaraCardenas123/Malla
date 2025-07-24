@@ -185,9 +185,10 @@ function crearCaja(nombre, datos) {
   const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
   if (container) container.appendChild(div);
 
+  // ✅ Aquí estaba el error
   if (datos.prerequisitos.length === 0) {
-  div.classList.remove("bloqueado");
-}
+    div.classList.remove("bloqueado");
+  }
 
   div.onclick = () => {
     if (estadoRamos[nombre]) return;
@@ -206,9 +207,3 @@ function crearCaja(nombre, datos) {
     });
   };
 }
-
-window.onload = () => {
-  Object.entries(ramos).forEach(([nombre, datos]) => {
-    crearCaja(nombre, datos);
-  });
-};
