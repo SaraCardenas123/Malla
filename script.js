@@ -326,26 +326,26 @@ function actualizarRamos() {
   });
 }
 
-function dibujarLineas() {
-  lineas.forEach(line => line.remove());
-  lineas.length = 0;
+//function dibujarLineas() {
+//  lineas.forEach(line => line.remove());
+//  lineas.length = 0;
 
-  Object.entries(ramos).forEach(([id, data]) => {
-    data.prerequisitos.forEach(prereq => {
-      const desde = document.getElementById(prereq);
-      const hasta = document.getElementById(id);
-      if (desde && hasta) {
-        const linea = new LeaderLine(desde, hasta, {
-          color: '#999',
-          size: 2,
-          path: 'straight',
-          startPlug: 'disc',
-          endPlug: 'arrow1'
-        });
-        lineas.push(linea);
-      }
-    });
-  });
+//  Object.entries(ramos).forEach(([id, data]) => {
+//    data.prerequisitos.forEach(prereq => {
+//      const desde = document.getElementById(prereq);
+//      const hasta = document.getElementById(id);
+//      if (desde && hasta) {
+ //       const linea = new LeaderLine(desde, hasta, {
+ //         color: '#999',
+ //         size: 2,
+  //        path: 'straight',
+//          startPlug: 'disc',
+//          endPlug: 'arrow1'
+ //       });
+//      lineas.push(linea);
+//      }
+//    });
+//  });
 }
 
 window.onload = () => {
