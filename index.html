@@ -4,52 +4,142 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malla Curricular Interactiva</title>
-  <link rel="stylesheet" href="estilos.css"/>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8f4ff;
+      color: #452475;
+      text-align: center;
+    }
+    .fila {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 24px;
+    }
+    .semestre {
+      background: #eee4ff;
+      border: 2px solid #c8aefc;
+      border-radius: 12px;
+      padding: 12px;
+      min-width: 120px;
+    }
+    .contenedor-semestre {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .ramo {
+      background: #fdfdff;
+      border-radius: 10px;
+      padding: 6px;
+      font-size: 13px;
+      border: 1px solid #d1c4e9;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .bloqueado {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .aprobado {
+      background: #c8e6c9;
+      border: 1px solid #81c784;
+    }
+    svg#lineas {
+      position: absolute;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
   <h1>Malla Curricular - Ingeniería Industrial</h1>
-  <div class="fila">
-    <div class="semestre" id="semestre1">
-      <h2>Semestre 1</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre2">
-      <h2>Semestre 2</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre3">
-      <h2>Semestre 3</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre4">
-      <h2>Semestre 4</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre5">
-      <h2>Semestre 5</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre6">
-      <h2>Semestre 6</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre7">
-      <h2>Semestre 7</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre8">
-      <h2>Semestre 8</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre9">
-      <h2>Semestre 9</h2>
-      <div class="contenedor-semestre"></div>
-    </div>
-    <div class="semestre" id="semestre10">
-      <h2>Semestre 10</h2>
-      <div class="contenedor-semestre"></div>
+  <div style="position: relative">
+    <svg id="lineas"></svg>
+    <div class="fila">
+      <div class="semestre" id="semestre1"><h2>Semestre 1</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre2"><h2>Semestre 2</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre3"><h2>Semestre 3</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre4"><h2>Semestre 4</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre5"><h2>Semestre 5</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre6"><h2>Semestre 6</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre7"><h2>Semestre 7</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre8"><h2>Semestre 8</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre9"><h2>Semestre 9</h2><div class="contenedor-semestre"></div></div>
+      <div class="semestre" id="semestre10"><h2>Semestre 10</h2><div class="contenedor-semestre"></div></div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script>
+    const estadoRamos = {};
+    const ramos = {}; // Reemplazar con la estructura del script.js anterior
+
+    function crearCaja(nombre, datos) {
+      const div = document.createElement("div");
+      div.className = "ramo bloqueado";
+      div.id = nombre;
+      div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
+      estadoRamos[nombre] = false;
+
+      const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+      if (container) container.appendChild(div);
+
+      if (datos.prerequisitos.length === 0) {
+        div.classList.remove("bloqueado");
+      }
+
+      div.onclick = () => {
+        if (estadoRamos[nombre]) return;
+        estadoRamos[nombre] = true;
+        div.classList.add("aprobado");
+        Object.entries(ramos).forEach(([destino, datosDestino]) => {
+          if (!estadoRamos[destino] && datosDestino.prerequisitos.every((pre) => estadoRamos[pre])) {
+            const destDiv = document.getElementById(destino);
+            destDiv.classList.remove("bloqueado");
+          }
+        });
+      };
+    }
+
+    function dibujarLineas() {
+      const svg = document.getElementById("lineas");
+      svg.innerHTML = "";
+      Object.entries(ramos).forEach(([nombre, datos]) => {
+        const origen = document.getElementById(nombre);
+        if (!origen) return;
+        datos.prerequisitos.forEach(pre => {
+          const destino = document.getElementById(pre);
+          if (!destino) return;
+          const start = destino.getBoundingClientRect();
+          const end = origen.getBoundingClientRect();
+          const svgRect = svg.getBoundingClientRect();
+          const x1 = start.left + start.width / 2 - svgRect.left;
+          const y1 = start.top + start.height - svgRect.top;
+          const x2 = end.left + end.width / 2 - svgRect.left;
+          const y2 = end.top - svgRect.top;
+
+          const linea = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          linea.setAttribute("x1", x1);
+          linea.setAttribute("y1", y1);
+          linea.setAttribute("x2", x2);
+          linea.setAttribute("y2", y2);
+          linea.setAttribute("stroke", "#9c27b0");
+          linea.setAttribute("stroke-width", "2");
+          svg.appendChild(linea);
+        });
+      });
+    }
+
+    window.onload = () => {
+      Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
+      setTimeout(dibujarLineas, 300); // espera a que todo cargue
+      window.addEventListener("resize", dibujarLineas);
+    };
+  </script>
 </body>
 </html>
