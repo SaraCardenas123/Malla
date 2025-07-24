@@ -3,14 +3,14 @@ const estadoRamos = {};
 const ramos = {
   "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
-    desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General" , "Calculo Integral"]
+    desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General", "Cálculo Integral"]
   },
   "Sociología especial: industrial y del trabajo": {
     semestre: 1, creditos: 3, prerequisitos: []
   },
   "Introducción a la Ingeniería Industrial": {
     semestre: 1, creditos: 3, prerequisitos: [],
-    desbloquea: ["Taller de Herramientas y Problemas", "Economía General" , "Taller de invención y Creatividad"]
+    desbloquea: ["Taller de Herramientas y Problemas", "Economía General", "Taller de Invención y Creatividad"]
   },
   "Programación de Computadores": {
     semestre: 1, creditos: 3, prerequisitos: [],
@@ -41,7 +41,7 @@ const ramos = {
   },
   "Fundamentos de Mecánica": {
     semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
-    desbloquea: ["Taller Ciencia y Tecnología Materiales", "Fundameentos de Electricidad y Magnetismo"]
+    desbloquea: ["Taller Ciencia y Tecnología Materiales", "Fundamentos de Electricidad y Magnetismo"]
   },
   "Economía General": {
     semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial"],
@@ -126,13 +126,13 @@ const ramos = {
   "Seguridad Industrial": {
     semestre: 7, creditos: 2, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
     desbloquea: ["Taller Diseño Plantas", "Gerencia de Recursos Humanos"]
-  }, 
+  },
   "Taller Ingeniería de Producción": {
     semestre: 7, creditos: 3, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
     desbloquea: ["Taller Diseño Plantas"]
   },
   "Taller Metodología Investigación": {
-    semestre: 7, creditos: 3, prerequisitos: ["Taller de Invención y Creatividad", "Inferencia Estadística Fundamental"],
+    semestre: 7, creditos: 3, prerequisitos: ["Taller de Invención y Creatividad", "Inferencia Estadística Fundamental"]
   },
   "Logística": {
     semestre: 8, creditos: 3, prerequisitos: ["Taller Simulación Procesos"]
@@ -146,33 +146,15 @@ const ramos = {
   "Taller Diseño Plantas": {
     semestre: 8, creditos: 3, prerequisitos: ["Taller Ingeniería de Producción", "Seguridad Industrial", "Sistemas de Información"]
   },
-  "Libre elección 2": {
-    semestre: 8, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 3": {
-    semestre: 9, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 4": {
-    semestre: 9, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 5": {
-    semestre: 9, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 6": {
-    semestre: 9, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 7": {
-    semestre: 10, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 8": {
-    semestre: 10, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 9": {
-    semestre: 10, creditos: 2, prerequisitos: []
-  },
-  "Trabajo de grado": {
-    semestre: 10, creditos: 5, prerequisitos: []
-  }
+  "Libre elección 2": { semestre: 8, creditos: 2, prerequisitos: [] },
+  "Libre elección 3": { semestre: 9, creditos: 2, prerequisitos: [] },
+  "Libre elección 4": { semestre: 9, creditos: 2, prerequisitos: [] },
+  "Libre elección 5": { semestre: 9, creditos: 2, prerequisitos: [] },
+  "Libre elección 6": { semestre: 9, creditos: 2, prerequisitos: [] },
+  "Libre elección 7": { semestre: 10, creditos: 2, prerequisitos: [] },
+  "Libre elección 8": { semestre: 10, creditos: 2, prerequisitos: [] },
+  "Libre elección 9": { semestre: 10, creditos: 2, prerequisitos: [] },
+  "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
 };
 
 function crearCaja(nombre, datos) {
@@ -185,7 +167,6 @@ function crearCaja(nombre, datos) {
   const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
   if (container) container.appendChild(div);
 
-  // ✅ Aquí estaba el error
   if (datos.prerequisitos.length === 0) {
     div.classList.remove("bloqueado");
   }
@@ -207,6 +188,7 @@ function crearCaja(nombre, datos) {
     });
   };
 }
+
 window.onload = () => {
   Object.entries(ramos).forEach(([nombre, datos]) => {
     crearCaja(nombre, datos);
