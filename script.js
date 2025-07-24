@@ -186,10 +186,8 @@ function crearCaja(nombre, datos) {
   if (container) container.appendChild(div);
 
   if (datos.prerequisitos.length === 0) {
-
-  destDiv.classList.remove("bloqueado");
-
-  }
+  div.classList.remove("bloqueado");
+}
 
   div.onclick = () => {
     if (estadoRamos[nombre]) return;
