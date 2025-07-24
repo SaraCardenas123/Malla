@@ -3,14 +3,14 @@ const estadoRamos = {};
 const ramos = {
   "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
-    desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General"]
+    desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General" , "Calculo Integral"]
   },
   "Sociología especial: industrial y del trabajo": {
     semestre: 1, creditos: 3, prerequisitos: []
   },
   "Introducción a la Ingeniería Industrial": {
     semestre: 1, creditos: 3, prerequisitos: [],
-    desbloquea: ["Taller de Herramientas y Problemas", "Economía General"]
+    desbloquea: ["Taller de Herramientas y Problemas", "Economía General" , "Taller de invención y Creatividad"]
   },
   "Programación de Computadores": {
     semestre: 1, creditos: 3, prerequisitos: [],
@@ -25,7 +25,7 @@ const ramos = {
     desbloquea: ["Ecuaciones Diferenciales", "Optimización"]
   },
   "Taller de Invención y Creatividad": {
-    semestre: 2, creditos: 2, prerequisitos: [],
+    semestre: 2, creditos: 2, prerequisitos: ["Introducción a la Ingenieria Industrial"],
     desbloquea: ["Gestión Empresarial"]
   },
   "Programación Orientada a Objetos": {
@@ -41,11 +41,11 @@ const ramos = {
   },
   "Fundamentos de Mecánica": {
     semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
-    desbloquea: ["Taller Ciencia y Tecnología Materiales"]
+    desbloquea: ["Taller Ciencia y Tecnología Materiales", "Fundameentos de Electricidad y Magnetismo"]
   },
   "Economía General": {
     semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial"],
-    desbloquea: ["Gestión Empresarial"]
+    desbloquea: ["Gestión Empresarial", "Sistema de Costos"]
   },
   "Taller de Herramientas y Problemas": {
     semestre: 3, creditos: 2, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial", "Programación Orientada a Objetos"],
@@ -72,11 +72,11 @@ const ramos = {
   },
   "Taller Ciencia y Tecnología Materiales": {
     semestre: 4, creditos: 2, prerequisitos: ["Fundamentos de Mecánica"],
-    desbloquea: ["Taller de Procesos Químicos y Biotecnológicos"]
+    desbloquea: ["Taller de Procesos Químicos y Biotecnológicos", "Taller de Procesos Metalmecánicos"]
   },
   "Modelos y Simulación": {
     semestre: 5, creditos: 4, prerequisitos: ["Cálculo en Varias Variables", "Taller de Herramientas y Problemas", "Ecuaciones Diferenciales", "Probabilidad Fundamental"],
-    desbloquea: ["Modelos Estocásticos", "Taller Simulación Procesos"]
+    desbloquea: ["Modelos Estocásticos"]
   },
   "Optimización": {
     semestre: 5, creditos: 3, prerequisitos: ["Álgebra Lineal", "Cálculo en Varias Variables"],
@@ -84,13 +84,13 @@ const ramos = {
   },
   "Ingeniería Económica y Análisis de Riesgo": {
     semestre: 5, creditos: 3, prerequisitos: ["Sistema de Costos", "Cálculo en Varias Variables"],
-    desbloquea: ["Finanzas"]
+    desbloquea: ["Finanzas", "Gerencia y Gestión de Proyectos"]
   },
   "Taller de Procesos Químicos y Biotecnológicos": {
     semestre: 5, creditos: 2, prerequisitos: ["Taller Ciencia y Tecnología Materiales"]
   },
   "Taller de Procesos Metalmecánicos": {
-    semestre: 5, creditos: 2, prerequisitos: [],
+    semestre: 5, creditos: 2, prerequisitos: ["Taller Ciencia y Tecnología Materiales"],
     desbloquea: ["Taller Ergonomía e Ingeniería de Métodos"]
   },
   "Inferencia Estadística Fundamental": {
@@ -102,7 +102,7 @@ const ramos = {
     desbloquea: ["Taller Simulación Procesos", "Taller Ingeniería de Producción"]
   },
   "Gerencia y Gestión de Proyectos": {
-    semestre: 6, creditos: 3, prerequisitos: [],
+    semestre: 6, creditos: 3, prerequisitos: ["Ingeniería Económica y Análisis de Riesgo"],
     desbloquea: ["Sistemas de Información"]
   },
   "Finanzas": {
@@ -125,11 +125,14 @@ const ramos = {
   },
   "Seguridad Industrial": {
     semestre: 7, creditos: 2, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
-    desbloquea: ["Taller Diseño Plantas"]
+    desbloquea: ["Taller Diseño Plantas", "Gerencia de Recursos Humanos"]
   },
   "Taller Ingeniería de Producción": {
     semestre: 7, creditos: 3, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
     desbloquea: ["Taller Diseño Plantas"]
+  },
+  "Taller Metodología Investigación": {
+    semestre: 7, creditos: 3, prerequisitos: ["Taller de Invención y Creatividad", "Inferencia Estadística Fundamental"],
   },
   "Logística": {
     semestre: 8, creditos: 3, prerequisitos: ["Taller Simulación Procesos"]
@@ -138,7 +141,7 @@ const ramos = {
     semestre: 8, creditos: 2, prerequisitos: ["Sistemas de Información"]
   },
   "Gerencia de Recursos Humanos": {
-    semestre: 8, creditos: 3, prerequisitos: []
+    semestre: 8, creditos: 3, prerequisitos: ["Seguridad Industrial"]
   },
   "Taller Diseño Plantas": {
     semestre: 8, creditos: 3, prerequisitos: ["Taller Ingeniería de Producción", "Seguridad Industrial", "Sistemas de Información"]
@@ -165,9 +168,6 @@ const ramos = {
     semestre: 10, creditos: 2, prerequisitos: []
   },
   "Libre elección 9": {
-    semestre: 10, creditos: 2, prerequisitos: []
-  },
-  "Libre elección 10": {
     semestre: 10, creditos: 2, prerequisitos: []
   },
   "Trabajo de grado": {
