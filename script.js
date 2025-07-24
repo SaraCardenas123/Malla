@@ -1,3 +1,4 @@
+const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
 const ramos = {
     "Cálculo Diferencial": {
