@@ -211,15 +211,4 @@ window.onload = () => {
   Object.entries(ramos).forEach(([nombre, datos]) => {
     crearCaja(nombre, datos);
   });
-
-  // Líneas desactivadas
-  // Object.entries(ramos).forEach(([nombre, datos]) => {
-  //   datos.prerequisitos.forEach(prerrequisito => {
-  //     const start = document.getElementById(prerrequisito);
-  //     const end = document.getElementById(nombre);
-  //     if (start && end) {
-  //       new LeaderLine(start, end, { color: '#999', size: 2, path: 'straight' });
-  //     }
-  //   });
-  // });
 };
