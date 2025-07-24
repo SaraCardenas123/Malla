@@ -1,7 +1,4 @@
-// script.js
-window.onload = () => {
-const estadoRamos = {};
-  // Primer semestre
+const ramos = {
   calculo_diferencial: {
     nombre: "Cálculo Diferencial",
     creditos: 4,
@@ -10,15 +7,15 @@ const estadoRamos = {};
     componente: "fund"
   },
   sociologia: {
-    nombre: "Sociología Especial",
-    creditos: 2,
+    nombre: "Sociología especial: industrial y del trabajo",
+    creditos: 3,
     semestre: 1,
     prerequisitos: [],
-    componente: "fund"
+    componente: "disc"
   },
-  intro_ingenieria: {
+  introduccion: {
     nombre: "Introducción a la Ingeniería Industrial",
-    creditos: 2,
+    creditos: 3,
     semestre: 1,
     prerequisitos: [],
     componente: "fund"
@@ -30,8 +27,6 @@ const estadoRamos = {};
     prerequisitos: [],
     componente: "fund"
   },
-
-  // Segundo semestre
   calculo_integral: {
     nombre: "Cálculo Integral",
     creditos: 4,
@@ -46,7 +41,7 @@ const estadoRamos = {};
     prerequisitos: ["calculo_diferencial"],
     componente: "fund"
   },
-  creatividad: {
+  taller_invencion: {
     nombre: "Taller de Invención y Creatividad",
     creditos: 2,
     semestre: 2,
@@ -58,20 +53,18 @@ const estadoRamos = {};
     creditos: 3,
     semestre: 2,
     prerequisitos: ["programacion"],
-    componente: "disc"
+    componente: "fund"
   },
-  eleccion2: {
-    nombre: "Libre Elección",
+  libre_2: {
+    nombre: "Libre elección",
     creditos: 2,
     semestre: 2,
     prerequisitos: [],
     componente: "opt"
   },
-
-  // Tercer semestre
   calculo_varias: {
     nombre: "Cálculo en Varias Variables",
-    creditos: 3,
+    creditos: 4,
     semestre: 3,
     prerequisitos: ["calculo_integral"],
     componente: "fund"
@@ -81,20 +74,20 @@ const estadoRamos = {};
     creditos: 3,
     semestre: 3,
     prerequisitos: ["calculo_diferencial"],
-    componente: "fund"
+    componente: "disc"
   },
   economia: {
     nombre: "Economía General",
-    creditos: 2,
-    semestre: 3,
-    prerequisitos: ["intro_ingenieria"],
-    componente: "fund"
-  },
-  taller_herramientas: {
-    nombre: "Taller de Herramientas y Problemas en Ingeniería Industrial",
     creditos: 3,
     semestre: 3,
-    prerequisitos: ["calculo_diferencial", "intro_ingenieria", "poo"],
+    prerequisitos: ["introduccion"],
+    componente: "disc"
+  },
+  taller_herramientas: {
+    nombre: "Taller de Herramientas y Problemas",
+    creditos: 2,
+    semestre: 3,
+    prerequisitos: ["introduccion", "calculo_diferencial", "poo"],
     componente: "disc"
   },
   probabilidad: {
@@ -104,8 +97,6 @@ const estadoRamos = {};
     prerequisitos: ["calculo_integral"],
     componente: "fund"
   },
-
-  // Cuarto semestre
   ecuaciones: {
     nombre: "Ecuaciones Diferenciales",
     creditos: 3,
@@ -115,10 +106,10 @@ const estadoRamos = {};
   },
   electricidad: {
     nombre: "Fundamentos de Electricidad y Magnetismo",
-    creditos: 2,
+    creditos: 3,
     semestre: 4,
     prerequisitos: ["calculo_integral"],
-    componente: "fund"
+    componente: "disc"
   },
   costos: {
     nombre: "Sistema de Costos",
@@ -127,27 +118,25 @@ const estadoRamos = {};
     prerequisitos: ["taller_herramientas"],
     componente: "disc"
   },
-  gestion_empresarial: {
+  gestion: {
     nombre: "Gestión Empresarial",
-    creditos: 2,
+    creditos: 3,
     semestre: 4,
-    prerequisitos: ["creatividad", "economia"],
+    prerequisitos: ["economia", "taller_invencion"],
     componente: "disc"
   },
-  materiales: {
-    nombre: "Taller de Ciencia y Tecnología de Materiales",
+  taller_materiales: {
+    nombre: "Taller Ciencia y Tecnología Materiales",
     creditos: 2,
     semestre: 4,
     prerequisitos: ["mecanica"],
     componente: "disc"
   },
-
-  // Quinto semestre
-  simulacion: {
+  modelos: {
     nombre: "Modelos y Simulación",
-    creditos: 4,
+    creditos: 3,
     semestre: 5,
-    prerequisitos: ["calculo_varias", "taller_herramientas", "probabilidad", "ecuaciones"],
+    prerequisitos: ["probabilidad", "taller_herramientas", "ecuaciones", "calculo_varias"],
     componente: "disc"
   },
   optimizacion: {
@@ -155,24 +144,24 @@ const estadoRamos = {};
     creditos: 3,
     semestre: 5,
     prerequisitos: ["algebra_lineal", "calculo_varias"],
-    componente: "disc"
+    componente: "fund"
   },
-  economia_riesgo: {
-    nombre: "Ingeniería Económica y Análisis de Riesgo",
+  ingenieria_economica: {
+    nombre: "Ing. Económica y Análisis de Riesgo",
     creditos: 3,
     semestre: 5,
-    prerequisitos: ["calculo_varias", "costos"],
+    prerequisitos: ["costos", "calculo_varias"],
     componente: "disc"
   },
-  quimicos: {
+  taller_quimica: {
     nombre: "Taller de Procesos Químicos y Biotecnológicos",
     creditos: 2,
     semestre: 5,
-    prerequisitos: ["materiales"],
+    prerequisitos: ["taller_materiales"],
     componente: "disc"
   },
-  metalmecanicos: {
-    nombre: "Taller de Procesos Metalmecánicos",
+  taller_metal: {
+    nombre: "Taller Procesos Metalmecánicos",
     creditos: 2,
     semestre: 5,
     prerequisitos: [],
@@ -185,16 +174,14 @@ const estadoRamos = {};
     prerequisitos: ["probabilidad"],
     componente: "fund"
   },
-
-  // Sexto semestre
-  estocasticos: {
-    nombre: "Modelos Estocásticos para Procesos de Manufactura y Servicios",
-    creditos: 4,
+  modelos_estocasticos: {
+    nombre: "Modelos Estocásticos",
+    creditos: 3,
     semestre: 6,
-    prerequisitos: ["simulacion", "optimizacion", "inferencia"],
+    prerequisitos: ["modelos", "optimizacion", "inferencia"],
     componente: "disc"
   },
-  proyectos: {
+  gerencia_proyectos: {
     nombre: "Gerencia y Gestión de Proyectos",
     creditos: 3,
     semestre: 6,
@@ -205,14 +192,14 @@ const estadoRamos = {};
     nombre: "Finanzas",
     creditos: 3,
     semestre: 6,
-    prerequisitos: ["economia_riesgo"],
+    prerequisitos: ["ingenieria_economica"],
     componente: "disc"
   },
-  ergonomia: {
-    nombre: "Taller de Ergonomía e Ingeniería de Métodos",
-    creditos: 2,
+  taller_ergonomia: {
+    nombre: "Taller Ergonomía e Ing. Métodos",
+    creditos: 3,
     semestre: 6,
-    prerequisitos: ["optimizacion", "metalmecanicos"],
+    prerequisitos: ["optimizacion", "taller_metal"],
     componente: "disc"
   },
   calidad: {
@@ -222,21 +209,18 @@ const estadoRamos = {};
     prerequisitos: ["inferencia"],
     componente: "disc"
   },
-  },
-
-  // Séptimo semestre
-  simulacion_procesos: {
-    nombre: "Taller de Simulación de Procesos de Manufactura y Servicios",
-    creditos: 2,
+  taller_simulacion: {
+    nombre: "Taller Simulación Procesos",
+    creditos: 3,
     semestre: 7,
-    prerequisitos: ["estocasticos"],
+    prerequisitos: ["modelos_estocasticos"],
     componente: "disc"
   },
   sistemas_info: {
     nombre: "Sistemas de Información",
     creditos: 3,
     semestre: 7,
-    prerequisitos: ["proyectos"],
+    prerequisitos: ["gerencia_proyectos"],
     componente: "disc"
   },
   seguridad: {
@@ -246,20 +230,18 @@ const estadoRamos = {};
     prerequisitos: ["electricidad"],
     componente: "disc"
   },
-  produccion: {
+  taller_produccion: {
     nombre: "Taller de Ingeniería de la Producción",
-    creditos: 2,
+    creditos: 3,
     semestre: 7,
-    prerequisitos: ["estocasticos", "ergonomia"],
+    prerequisitos: ["modelos_estocasticos", "taller_ergonomia"],
     componente: "disc"
   },
-
-  // Octavo semestre
   logistica: {
     nombre: "Logística",
     creditos: 3,
     semestre: 8,
-    prerequisitos: ["simulacion_procesos"],
+    prerequisitos: ["taller_simulacion"],
     componente: "disc"
   },
   gestion_tecnologica: {
@@ -276,75 +258,22 @@ const estadoRamos = {};
     prerequisitos: [],
     componente: "disc"
   },
-  diseno_plantas: {
+  taller_plantas: {
     nombre: "Taller de Diseño de Plantas",
     creditos: 3,
     semestre: 8,
-    prerequisitos: ["sistemas_info", "seguridad", "produccion"],
+    prerequisitos: ["sistemas_info", "taller_produccion", "seguridad"],
     componente: "disc"
   },
-  eleccion8: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 8,
-    prerequisitos: [],
-    componente: "opt"
-  },
-
-  // Noveno semestre
-  eleccion9a: {
-    nombre: "Libre Elección",
+  libre_9: {
+    nombre: "Libre elección",
     creditos: 2,
     semestre: 9,
     prerequisitos: [],
     componente: "opt"
   },
-  eleccion9b: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 9,
-    prerequisitos: [],
-    componente: "opt"
-  },
-  eleccion9c: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 9,
-    prerequisitos: [],
-    componente: "opt"
-  },
-  eleccion9d: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 9,
-    prerequisitos: [],
-    componente: "opt"
-  },
-
-  // Décimo semestre
-  eleccion10a: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 10,
-    prerequisitos: [],
-    componente: "opt"
-  },
-  eleccion10b: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 10,
-    prerequisitos: [],
-    componente: "opt"
-  },
-  eleccion10c: {
-    nombre: "Libre Elección",
-    creditos: 2,
-    semestre: 10,
-    prerequisitos: [],
-    componente: "opt"
-  },
-  eleccion10d: {
-    nombre: "Libre Elección",
+  libre_10: {
+    nombre: "Libre elección",
     creditos: 2,
     semestre: 10,
     prerequisitos: [],
@@ -355,11 +284,12 @@ const estadoRamos = {};
     creditos: 5,
     semestre: 10,
     prerequisitos: [],
-    componente: "disc"
+    componente: "trab"
   }
 };
 
 const lineas = [];
+const estadoRamos = {};
 
 function crearRamo(id, data) {
   const div = document.createElement("div");
@@ -427,5 +357,4 @@ window.onload = () => {
   });
   actualizarRamos();
   setTimeout(() => dibujarLineas(), 500);
-};
 };
