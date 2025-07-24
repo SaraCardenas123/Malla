@@ -1,109 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Malla Curricular - Ingeniería Industrial</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f5f0ff;
-      color: #4b0082;
-      text-align: center;
-    }
-
-    h1 {
-      margin-top: 20px;
-    }
-
-    .semestres {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-
-    .semestre {
-      background-color: #ede1fc;
-      border: 2px solid #c9a8f2;
-      border-radius: 12px;
-      padding: 10px;
-      width: 160px;
-    }
-
-    .contenedor-semestre {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .ramo {
-      padding: 10px;
-      border-radius: 8px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .bloqueado {
-      background-color: #e0d8f3;
-      color: #888;
-      cursor: not-allowed;
-    }
-
-    .aprobado {
-      background-color: #b5f5b5 !important;
-      color: #155724;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Malla Curricular - Ingeniería Industrial</h1>
-  <div class="semestres">
-    <div class="semestre" id="semestre1">
+
+  <div class="malla">
+    <!-- Semestres 1 al 10 -->
+    <div id="semestre1" class="semestre">
       <h3>Semestre 1</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre2">
+    <div id="semestre2" class="semestre">
       <h3>Semestre 2</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre3">
+    <div id="semestre3" class="semestre">
       <h3>Semestre 3</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre4">
+    <div id="semestre4" class="semestre">
       <h3>Semestre 4</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre5">
+    <div id="semestre5" class="semestre">
       <h3>Semestre 5</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre6">
+    <div id="semestre6" class="semestre">
       <h3>Semestre 6</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre7">
+    <div id="semestre7" class="semestre">
       <h3>Semestre 7</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre8">
+    <div id="semestre8" class="semestre">
       <h3>Semestre 8</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre9">
+    <div id="semestre9" class="semestre">
       <h3>Semestre 9</h3>
       <div class="contenedor-semestre"></div>
     </div>
-    <div class="semestre" id="semestre10">
+    <div id="semestre10" class="semestre">
       <h3>Semestre 10</h3>
       <div class="contenedor-semestre"></div>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
