@@ -126,7 +126,7 @@ const ramos = {
   "Seguridad Industrial": {
     semestre: 7, creditos: 2, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
     desbloquea: ["Taller Diseño Plantas", "Gerencia de Recursos Humanos"]
-  },
+  }, 
   "Taller Ingeniería de Producción": {
     semestre: 7, creditos: 3, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
     desbloquea: ["Taller Diseño Plantas"]
