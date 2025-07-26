@@ -220,3 +220,20 @@ window.onload = () => {
     document.getElementById(`s${datos.semestre}`).appendChild(div);
   });
 };
+function actualizarCreditos() {
+  let completados = 0;
+  let total = 0;
+
+  Object.entries(ramos).forEach(([nombre, datos]) => {
+    total += datos.creditos;
+    if (estadoRamos[nombre]) {
+      completados += datos.creditos;
+    }
+  });
+
+  const porcentaje = Math.round((completados / total) * 100);
+
+  document.getElementById("creditos-completados").textContent = completados;
+  document.getElementById("creditos-totales").textContent = total;
+  document.getElementById("porcentaje-avance").textContent = porcentaje;
+}
