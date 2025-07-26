@@ -219,6 +219,8 @@ window.onload = () => {
     const div = crearCaja(nombre, datos);
     document.getElementById(`s${datos.semestre}`).appendChild(div);
   });
+    actualizarCreditos();
+
 };
 function actualizarCreditos() {
   let completados = 0;
