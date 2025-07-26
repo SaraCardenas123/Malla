@@ -1,8 +1,43 @@
+// script.js actualizado con tipos de asignatura y clases CSS por color
+
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
+// Clasificación por tipo para colores
+const tipos = {
+  fundacion: [
+    "Cálculo Diferencial", "Sociología especial: industrial y del trabajo",
+    "Introducción a la Ingeniería Industrial", "Programación de Computadores",
+    "Cálculo Integral", "Álgebra Lineal", "Taller de Invención y Creatividad",
+    "Programación Orientada a Objetos", "Probabilidad Fundamental",
+    "Ecuaciones Diferenciales", "Fundamentos de Electricidad y Magnetismo",
+    "Fundamentos de Mecánica"
+  ],
+  disciplinar: [
+    "Taller de Herramientas y Problemas", "Economía General",
+    "Taller Ciencia y Tecnología Materiales", "Sistema de Costos",
+    "Gestión Empresarial", "Cálculo en Varias Variables", "Modelos y Simulación",
+    "Ingeniería Económica y Análisis de Riesgo", "Optimización",
+    "Taller de Procesos Químicos y Biotecnológicos",
+    "Taller de Procesos Metalmecánicos", "Inferencia Estadística Fundamental",
+    "Modelos Estocásticos", "Gerencia y Gestión de Proyectos", "Finanzas",
+    "Taller Ergonomía e Ingeniería de Métodos", "Control y Gestión Calidad",
+    "Taller Simulación Procesos", "Sistemas de Información",
+    "Seguridad Industrial", "Taller Ingeniería de Producción",
+    "Taller Metodología Investigación", "Logística",
+    "Gestión Tecnológica", "Gerencia de Recursos Humanos",
+    "Taller Diseño Plantas"
+  ],
+  optativa: [],
+  libre: [
+    "Libre elección 1", "Libre elección 2", "Libre elección 3", "Libre elección 4",
+    "Libre elección 5", "Libre elección 6", "Libre elección 7", "Libre elección 8",
+    "Libre elección 9"
+  ],
+  trabajo: ["Trabajo de grado"]
+};
+
 const ramos = {
-  // Estructura: "Nombre": { semestre, creditos, tipo, prerequisitos, desbloquea }
-    "Cálculo Diferencial": {
+      "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
     desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General", "Cálculo Integral"]
   },
@@ -158,38 +193,45 @@ const ramos = {
   "Trabajo de grado": { semestre: 10, creditos: 6, prerequisitos: [] }
 };
 
+function tipoAsignatura(nombre) {
+  for (const [tipo, lista] of Object.entries(tipos)) {
+    if (lista.includes(nombre)) return tipo;
+  }
+  return "libre"; // por defecto
+}
+
 function guardarEstado() {
   localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
   actualizarContadores();
 }
 
-function crearContenedorSemestres() {
+function crearContenedoresSemestre() {
   const malla = document.getElementById("malla-container");
   for (let i = 1; i <= 10; i++) {
     const columna = document.createElement("div");
     columna.className = "semestre";
     columna.id = `semestre${i}`;
-    const titulo = document.createElement("h2");
-    titulo.textContent = `Semestre ${i}`;
-    columna.appendChild(titulo);
+    columna.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
     malla.appendChild(columna);
   }
 }
 
 function crearCaja(nombre, datos) {
   const div = document.createElement("div");
-  div.className = `ramo bloqueado ${datos.tipo}`;
+  const tipo = tipoAsignatura(nombre);
+  div.className = `ramo bloqueado ${tipo}`;
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  const contenedor = document.getElementById(`semestre${datos.semestre}`);
-  contenedor.appendChild(div);
+  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  if (container) container.appendChild(div);
 
-  if (!estadoRamos.hasOwnProperty(nombre)) {
-    estadoRamos[nombre] = false;
-  }
+  if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
 
-  if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(pre => estadoRamos[pre])) {
+  if (
+    datos.prerequisitos.length === 0 ||
+    datos.prerequisitos.every(pre => estadoRamos[pre])
+  ) {
     div.classList.remove("bloqueado");
   }
 
@@ -207,27 +249,21 @@ function crearCaja(nombre, datos) {
     guardarEstado();
 
     Object.entries(ramos).forEach(([destino, datosDestino]) => {
-      if (
-        !estadoRamos[destino] &&
-        datosDestino.prerequisitos.every(pre => estadoRamos[pre])
-      ) {
-        const destDiv = document.getElementById(destino);
-        if (destDiv) destDiv.classList.remove("bloqueado");
+      if (!estadoRamos[destino] && datosDestino.prerequisitos.every(pre => estadoRamos[pre])) {
+        document.getElementById(destino)?.classList.remove("bloqueado");
       }
     });
   };
 }
 
 function actualizarContadores() {
-  const totalCreditos = Object.values(ramos).reduce((acc, cur) => acc + cur.creditos, 0);
-  const completados = Object.entries(estadoRamos)
-    .filter(([nombre, aprobado]) => aprobado)
-    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
-
-  const porcentaje = ((completados / totalCreditos) * 100).toFixed(2);
-
+  const total = 168;
+  let completados = 0;
+  for (const [nombre, aprobado] of Object.entries(estadoRamos)) {
+    if (aprobado && ramos[nombre]) completados += ramos[nombre].creditos;
+  }
   document.getElementById("creditosCompletados").textContent = completados;
-  document.getElementById("porcentajeAvance").textContent = porcentaje;
+  document.getElementById("porcentajeAvance").textContent = ((completados / total) * 100).toFixed(2);
 }
 
 function reiniciarProgreso() {
@@ -239,9 +275,10 @@ function reiniciarProgreso() {
 }
 
 window.onload = () => {
-  crearContenedorSemestres();
-  Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
+  crearContenedoresSemestre();
+  Object.entries(ramos).forEach(([nombre, datos]) => {
+    crearCaja(nombre, datos);
+  });
   actualizarContadores();
-
   document.getElementById("botonReiniciar").addEventListener("click", reiniciarProgreso);
 };
