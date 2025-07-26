@@ -1,4 +1,3 @@
-const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 const ramos = {
     "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
@@ -156,7 +155,9 @@ const ramos = {
   "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
 };
 
-// Calcular créditos totales una sola vez
+// Estado guardado en localStorage
+const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
+
 const totalCreditos = Object.values(ramos).reduce((acc, ramo) => acc + ramo.creditos, 0);
 document.getElementById("creditos-totales").textContent = totalCreditos;
 
@@ -206,7 +207,7 @@ function crearCaja(nombre, datos) {
 function actualizarProgreso() {
   const creditosCompletados = Object.entries(estadoRamos)
     .filter(([nombre, aprobado]) => aprobado)
-    .reduce((acc, [nombre]) => acc + ramos[nombre].creditos, 0);
+    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
 
   document.getElementById("creditos-completados").textContent = creditosCompletados;
   const porcentaje = Math.round((creditosCompletados / totalCreditos) * 100);
