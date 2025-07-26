@@ -1,10 +1,11 @@
 :root {
-  --color-fundacion: #A7D8DE;
-  --color-disciplinar: #FCD5CE;
-  --color-libre: #C5E1A5;
-  --color-trabajo: #FFE082;
+  --color-fundacion: #e0c3fc;     /* Morado pastel claro */
+  --color-disciplinar: #d5aaff;   /* Lavanda claro */
+  --color-optativa: #e5d0ff;      /* Lila pastel */
+  --color-libre: #f3e1ff;         /* Rosa-morado suave */
+  --color-trabajo: #d0b3ff;       /* Malva pastel */
   --color-bloqueado: #ddd;
-  --color-aprobado: #81C784;
+  --color-aprobado: #b2dfdb;      /* Verde suave */
 }
 
 body {
@@ -50,12 +51,17 @@ h1 {
   transition: background 0.3s;
 }
 
+/* Colores por tipo */
 .fundacion {
   background-color: var(--color-fundacion);
 }
 
 .disciplinar {
   background-color: var(--color-disciplinar);
+}
+
+.optativa {
+  background-color: var(--color-optativa);
 }
 
 .libre {
