@@ -205,14 +205,15 @@ function crearCaja(nombre, datos) {
 }
 
 function actualizarContadores() {
-  const totalCreditos = Object.values(ramos).reduce((sum, r) => sum + r.creditos, 0);
+  const totalCreditos = 168; // Valor actualizado
   const completados = Object.entries(estadoRamos)
-    .filter(([k, aprobado]) => aprobado)
-    .reduce((sum, [k]) => sum + (ramos[k]?.creditos || 0), 0);
+    .filter(([nombre, aprobado]) => aprobado)
+    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
+
   const porcentaje = ((completados / totalCreditos) * 100).toFixed(2);
 
-  document.getElementById("creditosCompletados").innerText = completados;
-  document.getElementById("porcentajeAvance").innerText = porcentaje;
+  document.getElementById("creditos-completados").innerText = completados;
+  document.getElementById("porcentaje").innerText = porcentaje;
 }
 
 function reiniciarProgreso() {
@@ -229,5 +230,6 @@ window.onload = () => {
   });
   actualizarContadores();
 
-  document.getElementById("botonReiniciar").addEventListener("click", reiniciarProgreso);
+  document.getElementById("reset").addEventListener("click", reiniciarProgreso);
+
 };
