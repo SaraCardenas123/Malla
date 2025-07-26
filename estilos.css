@@ -1,67 +1,98 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  background-color: #fdfbff;
+  margin: 0;
+  padding: 0;
+  color: #2e1065;
 }
 
 h1 {
   text-align: center;
+  padding: 1rem 0;
+  font-size: 2rem;
 }
 
-.fila {
+#contenedor-malla {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 10px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
 }
 
 .semestre {
-  margin: 0 10px;
-  min-width: 200px;
-  background-color: #f0f0f0;
+  background-color: #f3e8ff;
+  border: 2px solid #d8b4fe;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 240px;
+  min-height: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.semestre h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #6b21a8;
+}
+
+.materia {
+  background-color: #fff;
+  border: 2px solid #ccc;
   border-radius: 10px;
-  padding: 10px;
-}
-
-.contenedor-semestre {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ramo {
-  background-color: #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.2s ease;
+  text-align: center;
 }
 
-.ramo.bloqueado {
-  background-color: #999;
+.materia:hover {
+  background-color: #ede9fe;
+}
+
+.materia.completada {
+  background-color: #d1fae5;
+  border-color: #10b981;
+  color: #065f46;
+  font-weight: bold;
+}
+
+.materia.bloqueada {
+  background-color: #f3f4f6;
+  color: #9ca3af;
   cursor: not-allowed;
-  opacity: 0.6;
+  border-color: #e5e7eb;
 }
 
-.ramo.aprobado {
-  background-color: #4caf50;
+.reiniciar {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  padding: 0.75rem 1rem;
+  background-color: #ef4444;
   color: white;
-}
-
-#progreso {
-  text-align: center;
-  margin-bottom: 15px;
-  font-size: 1.1em;
-}
-
-#reiniciar {
-  display: block;
-  margin: 0 auto 20px auto;
-  padding: 8px 16px;
-  font-size: 1em;
   border: none;
-  background-color: #e53935;
-  color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background-color 0.2s;
+}
+
+.reiniciar:hover {
+  background-color: #dc2626;
+}
+
+.progreso {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f3f4f6;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-weight: bold;
+  color: #111827;
 }
