@@ -1,5 +1,3 @@
-// script.js
-
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
 const ramos = {
@@ -170,18 +168,7 @@ function crearCaja(nombre, datos) {
   div.className = "ramo bloqueado";
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
-
-  let contenedor = document.getElementById(`semestre${datos.semestre}`);
-  if (!contenedor) {
-    contenedor = document.createElement("div");
-    contenedor.className = "semestre";
-    contenedor.id = `semestre${datos.semestre}`;
-    contenedor.innerHTML = `<h2>Semestre ${datos.semestre}</h2><div class="contenedor-semestre"></div>`;
-    document.getElementById("malla-container").appendChild(contenedor);
-  }
-
-  const lista = contenedor.querySelector(".contenedor-semestre");
-  lista.appendChild(div);
+  document.getElementById("malla-container").appendChild(div);
 
   if (!estadoRamos.hasOwnProperty(nombre)) {
     estadoRamos[nombre] = false;
@@ -197,40 +184,39 @@ function crearCaja(nombre, datos) {
   }
 
   div.onclick = () => {
-    if (estadoRamos[nombre]) return;
+    if (div.classList.contains("bloqueado")) return;
 
-    estadoRamos[nombre] = true;
-    div.classList.add("aprobado");
-    div.classList.remove("bloqueado");
+    estadoRamos[nombre] = !estadoRamos[nombre];
+    div.classList.toggle("aprobado");
     guardarEstado();
 
+    // Desbloquear materias dependientes
     Object.entries(ramos).forEach(([destino, datosDestino]) => {
-      if (
-        !estadoRamos[destino] &&
-        datosDestino.prerequisitos.every(pre => estadoRamos[pre])
-      ) {
-        const destDiv = document.getElementById(destino);
-        if (destDiv) destDiv.classList.remove("bloqueado");
+      const requisitos = datosDestino.prerequisitos;
+      const seCumplen = requisitos.every(pr => estadoRamos[pr]);
+      const destDiv = document.getElementById(destino);
+      if (destDiv) {
+        if (!estadoRamos[destino] && seCumplen) {
+          destDiv.classList.remove("bloqueado");
+        }
       }
     });
   };
 }
 
 function actualizarContadores() {
-  const totalCreditos = Object.values(ramos).reduce((acc, cur) => acc + cur.creditos, 0);
+  const totalCreditos = Object.values(ramos).reduce((sum, r) => sum + r.creditos, 0);
   const completados = Object.entries(estadoRamos)
-    .filter(([_, aprobado]) => aprobado)
-    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
-
+    .filter(([k, aprobado]) => aprobado)
+    .reduce((sum, [k]) => sum + (ramos[k]?.creditos || 0), 0);
   const porcentaje = ((completados / totalCreditos) * 100).toFixed(2);
 
   document.getElementById("creditosCompletados").innerText = completados;
   document.getElementById("porcentajeAvance").innerText = porcentaje;
-  document.getElementById("creditosTotales").innerText = totalCreditos;
 }
 
 function reiniciarProgreso() {
-  if (confirm("¿Estás seguro que deseas reiniciar tu progreso?")) {
+  if (confirm("¿Deseas reiniciar tu progreso?")) {
     Object.keys(estadoRamos).forEach(k => estadoRamos[k] = false);
     guardarEstado();
     location.reload();
@@ -242,5 +228,6 @@ window.onload = () => {
     crearCaja(nombre, datos);
   });
   actualizarContadores();
+
   document.getElementById("botonReiniciar").addEventListener("click", reiniciarProgreso);
 };
