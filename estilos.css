@@ -1,85 +1,58 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #f9f9f9;
+  background: #f4f4f4;
   color: #333;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
 }
 
-.semestre {
-  margin-bottom: 25px;
-  background-color: #f0f0f0;
-  border-radius: 12px;
-  padding: 15px;
+#estado {
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: center;
 }
 
-.semestre h2 {
-  margin-top: 0;
-  font-size: 22px;
-  color: #111;
+button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.contenedor-semestre {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+#botonReiniciar {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 .ramo {
-  background-color: #d3d3d3;
-  border-radius: 8px;
-  padding: 12px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.ramo:hover {
-  background-color: #c0c0c0;
-}
-
-.bloqueado {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
   background-color: #e0e0e0;
-  color: #999;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.aprobado {
-  background-color: #4CAF50;
-  color: white;
-}
-
-#footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #ffffff;
-  border-top: 1px solid #ccc;
-}
-
-#avance {
-  font-size: 16px;
-}
-
-button.btn-red, #botonReiniciar {
-  padding: 10px 20px;
-  background-color: #e53935;
-  color: white;
-  border: none;
-  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  width: fit-content;
 }
 
-button.btn-red:hover, #botonReiniciar:hover {
-  background-color: #c62828;
+.ramo.aprobado {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.ramo.bloqueado {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+#semestre-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
