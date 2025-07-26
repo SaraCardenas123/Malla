@@ -1,102 +1,98 @@
-:root {
-  --color-fundacion: #A7D8DE;
-  --color-disciplinar: #FCD5CE;
-  --color-libre: #C5E1A5;
-  --color-trabajo: #FFE082;
-  --color-bloqueado: #ddd;
-  --color-aprobado: #81C784;
-}
-
 body {
   font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  background-color: #faf8ff;
   margin: 0;
   padding: 0;
-  text-align: center;
+  color: #333;
 }
 
 h1 {
-  margin: 20px 0;
+  text-align: center;
+  padding: 20px;
+  color: #5e2b88;
 }
 
 #malla-container {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
   padding: 20px;
-  gap: 20px;
-  justify-content: flex-start;
-}
-
-.semestre {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  min-width: 200px;
-}
-
-.semestre h3 {
-  margin-top: 0;
-  font-size: 1.2em;
 }
 
 .ramo {
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  padding: 6px;
-  margin: 6px 0;
+  width: 180px;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: background 0.3s;
+  text-align: center;
+  transition: transform 0.2s, background-color 0.3s;
+  border: 2px solid transparent;
 }
 
-.fundacion {
-  background-color: var(--color-fundacion);
+.ramo:hover {
+  transform: scale(1.04);
 }
 
-.disciplinar {
-  background-color: var(--color-disciplinar);
-}
-
-.libre {
-  background-color: var(--color-libre);
-}
-
-.trabajo {
-  background-color: var(--color-trabajo);
-}
-
-.bloqueado {
-  background-color: var(--color-bloqueado) !important;
-  color: #999;
+/* Estados */
+.ramo.bloqueado {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
-.aprobado {
-  background-color: var(--color-aprobado) !important;
+.ramo.aprobado {
+  border: 2px solid #4a2a69;
   text-decoration: line-through;
 }
 
+/* Tipos de asignatura */
+.fundacion {
+  background-color: #e6ccff;
+}
+
+.disciplinar {
+  background-color: #d1b3ff;
+}
+
+.optativa {
+  background-color: #caa6ff;
+}
+
+.libre {
+  background-color: #e0ccff;
+}
+
+.trabajo {
+  background-color: #b399ff;
+}
+
 #footer {
-  margin: 20px;
+  background-color: #f3eaff;
+  padding: 15px;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  border-top: 2px solid #ccc;
 }
 
 #botonReiniciar {
-  padding: 8px 16px;
-  font-size: 1em;
-  background-color: #e57373;
-  border: none;
-  border-radius: 6px;
+  background-color: #915ac1;
   color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
 #botonReiniciar:hover {
-  background-color: #d32f2f;
+  background-color: #7b49a6;
 }
 
 #avance {
-  margin-top: 10px;
   font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
 }
