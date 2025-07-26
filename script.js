@@ -170,7 +170,7 @@ function crearCaja(nombre, datos) {
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  let container = document.getElementById("malla-container");
+  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
   container.appendChild(div);
 
   if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
