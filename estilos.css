@@ -1,75 +1,92 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
   margin: 0;
   padding: 20px;
-  background-color: #f0f4f8;
+  color: #333;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 30px;
   color: #2c3e50;
 }
 
 #malla-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .semestre {
   background-color: #ffffff;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 2px solid #dcdcdc;
+  border-radius: 12px;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .semestre h2 {
-  font-size: 16px;
-  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 0;
+  font-size: 18px;
   color: #34495e;
 }
 
-.ramo {
-  background-color: #e0e0e0;
-  margin-bottom: 8px;
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.contenedor-semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.ramo.bloqueado {
-  background-color: #cfd8dc;
-  color: #607d8b;
-  cursor: not-allowed;
+.ramo {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #ecf0f1;
+  border: 1px solid #bdc3c7;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ramo:hover {
+  background-color: #d0e4f7;
 }
 
 .ramo.aprobado {
-  background-color: #81c784;
-  color: #fff;
+  background-color: #2ecc71;
+  color: white;
+  font-weight: bold;
+  border-color: #27ae60;
+}
+
+.ramo.bloqueado {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
 }
 
 #footer {
-  margin-top: 20px;
+  margin-top: 40px;
   text-align: center;
 }
 
+#avance {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
 #botonReiniciar {
-  background-color: #e53935;
+  padding: 10px 20px;
+  background-color: #e74c3c;
   color: white;
-  padding: 8px 16px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 #botonReiniciar:hover {
-  background-color: #c62828;
-}
-
-#avance {
-  margin-top: 10px;
-  font-weight: bold;
+  background-color: #c0392b;
 }
