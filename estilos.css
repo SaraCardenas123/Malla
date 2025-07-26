@@ -1,121 +1,102 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
+:root {
+  --color-fundacion: #A7D8DE;
+  --color-disciplinar: #FCD5CE;
+  --color-libre: #C5E1A5;
+  --color-trabajo: #FFE082;
+  --color-bloqueado: #ddd;
+  --color-aprobado: #81C784;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
   margin: 0;
   padding: 0;
-}
-
-/* Estilos generales */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f6fc;
-  color: #333;
-  padding: 20px;
-}
-
-/* Título */
-h1 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #5e3a78;
 }
 
-/* Contenedor de la malla */
+h1 {
+  margin: 20px 0;
+}
+
 #malla-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 20px;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
-/* Contenedor de cada semestre */
 .semestre {
-  background-color: #eee9f3;
+  background: white;
+  border: 1px solid #ccc;
   border-radius: 10px;
   padding: 10px;
-  width: 280px;
+  min-width: 200px;
 }
 
-.semestre h2 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #5e3a78;
+.semestre h3 {
+  margin-top: 0;
+  font-size: 1.2em;
 }
 
-/* Bloques de ramos */
 .ramo {
-  background-color: #d8c7e5;
+  border: 1px solid #aaa;
   border-radius: 8px;
-  padding: 10px;
+  padding: 6px;
   margin: 6px 0;
-  text-align: center;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background 0.3s;
 }
 
-.ramo:hover {
-  transform: scale(1.02);
-}
-
-/* Estado de bloqueado */
-.ramo.bloqueado {
-  background-color: #e6e0ec;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Estado de aprobado */
-.ramo.aprobado {
-  background-color: #b18fd7;
-  color: white;
-  font-weight: bold;
-}
-
-/* Tipo de asignatura */
 .fundacion {
-  background-color: #e2d4f0;
+  background-color: var(--color-fundacion);
 }
 
 .disciplinar {
-  background-color: #d3bce5;
-}
-
-.optativa {
-  background-color: #f1dbf5;
+  background-color: var(--color-disciplinar);
 }
 
 .libre {
-  background-color: #ecdff5;
+  background-color: var(--color-libre);
 }
 
 .trabajo {
-  background-color: #c5a3e8;
+  background-color: var(--color-trabajo);
 }
 
-/* Footer */
+.bloqueado {
+  background-color: var(--color-bloqueado) !important;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.aprobado {
+  background-color: var(--color-aprobado) !important;
+  text-decoration: line-through;
+}
+
 #footer {
-  margin-top: 30px;
-  text-align: center;
+  margin: 20px;
+}
+
+#botonReiniciar {
+  padding: 8px 16px;
+  font-size: 1em;
+  background-color: #e57373;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+#botonReiniciar:hover {
+  background-color: #d32f2f;
 }
 
 #avance {
-  margin-top: 15px;
-  font-size: 1.1em;
-  color: #5e3a78;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #a277d4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  background-color: #8b5db7;
+  margin-top: 10px;
+  font-weight: bold;
 }
