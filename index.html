@@ -3,99 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Malla Curricular Interactiva</title>
+  <title>Malla Curricular - Ingeniería Industrial</title>
   <link rel="stylesheet" href="estilos.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fdfdfd;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .fila {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .semestre {
-      flex: 1 0 18%;
-      margin: 10px;
-      padding: 10px;
-      background-color: #eaeaea;
-      border-radius: 8px;
-    }
-
-    .contenedor-semestre {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .ramo {
-      padding: 10px;
-      border-radius: 5px;
-      background-color: #ccc;
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-
-    .ramo.bloqueado {
-      background-color: #eee;
-      color: #aaa;
-      cursor: not-allowed;
-    }
-
-    .ramo.aprobado {
-      background-color: #a5d6a7;
-      border-color: green;
-    }
-
-    #creditos-info {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: #f0f0f0;
-      border: 1px solid #ccc;
-      padding: 10px;
-      font-weight: bold;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-
-    #reset-btn {
-      position: fixed;
-      bottom: 60px;
-      right: 10px;
-      background: #f44336;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <h1>Malla Curricular - Ingeniería Industrial</h1>
-  <div class="fila" id="contenedor-semestres"></div>
 
-  <div id="creditos-info">
-    Créditos completados: 
-    <span id="creditos-completados">0</span>
-<span id="creditos-totales">0</span>
-<span id="porcentaje-avance">0%</span>
+  <!-- CONTENEDOR DE TODA LA MALLA -->
+  <div id="contenedor-malla"></div>
 
+  <!-- BOTÓN DE REINICIO -->
+  <button id="reiniciar" class="reiniciar">Reiniciar selección</button>
+
+  <!-- INDICADOR DE AVANCE -->
+  <div class="progreso">
+    Créditos completados:
+    <strong><span id="creditos-completados">0</span> / <span id="creditos-totales">0</span> (<span id="porcentaje-avance">0%</span>)</strong>
   </div>
 
-  <button id="reset-btn">Reiniciar selección</button>
-
+  <!-- SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
