@@ -220,7 +220,7 @@ function actualizarContador() {
     .filter(mat => materiasCompletadas.includes(mat.id))
     .reduce((acc, mat) => acc + mat.creditos, 0);
 
-  const porcentaje = ((creditos / totalCreditos) * 100).toFixed(1);
+  const porcentaje = ((creditos / totalCreditos) * 100).toFixed(2);
 
 
   contador.textContent = `Créditos completados: ${creditos} / ${totalCreditos} (${porcentaje}%)`;
