@@ -1,5 +1,4 @@
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
-
 const ramos = {
     "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
@@ -156,8 +155,14 @@ const ramos = {
   "Libre elección 9": { semestre: 10, creditos: 2, prerequisitos: [] },
   "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
 };
+
+// Calcular créditos totales una sola vez
+const totalCreditos = Object.values(ramos).reduce((acc, ramo) => acc + ramo.creditos, 0);
+document.getElementById("creditos-totales").textContent = totalCreditos;
+
 function guardarEstado() {
   localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
+  actualizarProgreso();
 }
 
 function crearCaja(nombre, datos) {
@@ -166,9 +171,10 @@ function crearCaja(nombre, datos) {
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
+  if (!estadoRamos.hasOwnProperty(nombre)) {
+    estadoRamos[nombre] = false;
+  }
 
-  // Habilitar si no tiene prerequisitos o ya se cumplieron
   if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(pre => estadoRamos[pre])) {
     div.classList.remove("bloqueado");
   }
@@ -180,62 +186,54 @@ function crearCaja(nombre, datos) {
 
   div.onclick = () => {
     if (estadoRamos[nombre]) return;
+
     estadoRamos[nombre] = true;
     div.classList.add("aprobado");
     guardarEstado();
-    actualizarDisponibles();
+
+    Object.entries(ramos).forEach(([destino, datosDestino]) => {
+      if (!estadoRamos[destino] && datosDestino.prerequisitos.every(pre => estadoRamos[pre])) {
+        const destDiv = document.getElementById(destino);
+        if (destDiv) destDiv.classList.remove("bloqueado");
+      }
+    });
   };
 
-  return div;
+  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  if (container) container.appendChild(div);
 }
 
-function crearSemestre(numero) {
-  const div = document.createElement("div");
-  div.className = "semestre";
-  div.innerHTML = `<h2>Semestre ${numero}</h2><div class="contenedor-semestre" id="s${numero}"></div>`;
-  return div;
+function actualizarProgreso() {
+  const creditosCompletados = Object.entries(estadoRamos)
+    .filter(([nombre, aprobado]) => aprobado)
+    .reduce((acc, [nombre]) => acc + ramos[nombre].creditos, 0);
+
+  document.getElementById("creditos-completados").textContent = creditosCompletados;
+  const porcentaje = Math.round((creditosCompletados / totalCreditos) * 100);
+  document.getElementById("porcentaje-avance").textContent = `${porcentaje}%`;
 }
 
-function actualizarDisponibles() {
-  Object.entries(ramos).forEach(([nombre, datos]) => {
-    const div = document.getElementById(nombre);
-    if (!estadoRamos[nombre] && datos.prerequisitos.every(pre => estadoRamos[pre])) {
-      div.classList.remove("bloqueado");
-    }
-  });
+function construirSemestres() {
+  const contenedor = document.getElementById("contenedor-malla");
+  for (let i = 1; i <= 10; i++) {
+    const columna = document.createElement("div");
+    columna.className = "semestre";
+    columna.id = `semestre${i}`;
+    columna.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
+    contenedor.appendChild(columna);
+  }
 }
+
+document.getElementById("reiniciar").onclick = () => {
+  if (confirm("¿Seguro que deseas reiniciar tu progreso?")) {
+    Object.keys(estadoRamos).forEach(r => estadoRamos[r] = false);
+    guardarEstado();
+    location.reload();
+  }
+};
 
 window.onload = () => {
-  const contenedor = document.getElementById("contenedor-semestres");
-
-  // Crear semestres
-  const maxSemestre = Math.max(...Object.values(ramos).map(r => r.semestre));
-  for (let i = 1; i <= maxSemestre; i++) {
-    contenedor.appendChild(crearSemestre(i));
-  }
-
-  // Crear ramos
-  Object.entries(ramos).forEach(([nombre, datos]) => {
-    const div = crearCaja(nombre, datos);
-    document.getElementById(`s${datos.semestre}`).appendChild(div);
-  });
-    actualizarCreditos();
-
+  construirSemestres();
+  Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
+  actualizarProgreso();
 };
-function actualizarCreditos() {
-  let completados = 0;
-  let total = 0;
-
-  Object.entries(ramos).forEach(([nombre, datos]) => {
-    total += datos.creditos;
-    if (estadoRamos[nombre]) {
-      completados += datos.creditos;
-    }
-  });
-
-  const porcentaje = Math.round((completados / total) * 100);
-
-  document.getElementById("creditos-completados").textContent = completados;
-  document.getElementById("creditos-totales").textContent = total;
-  document.getElementById("porcentaje-avance").textContent = porcentaje;
-}
