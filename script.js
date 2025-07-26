@@ -158,6 +158,8 @@ const ramos = {
 };
 
 
+// Agrega aquí las demás materias si las tienes
+
 function guardarEstado() {
   localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
   actualizarContadores();
@@ -168,7 +170,17 @@ function crearCaja(nombre, datos) {
   div.className = "ramo bloqueado";
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
-  document.getElementById("malla-container").appendChild(div);
+
+  let contenedor = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  if (!contenedor) {
+    contenedor = document.createElement("div");
+    contenedor.className = "semestre";
+    contenedor.innerHTML = `<h2>Semestre ${datos.semestre}</h2><div class="contenedor-semestre"></div>`;
+    document.getElementById("malla-container").appendChild(contenedor);
+    contenedor = contenedor.querySelector(".contenedor-semestre");
+  }
+
+  contenedor.appendChild(div);
 
   if (!estadoRamos.hasOwnProperty(nombre)) {
     estadoRamos[nombre] = false;
@@ -184,28 +196,27 @@ function crearCaja(nombre, datos) {
   }
 
   div.onclick = () => {
-    if (div.classList.contains("bloqueado")) return;
+    if (estadoRamos[nombre]) return;
 
-    estadoRamos[nombre] = !estadoRamos[nombre];
-    div.classList.toggle("aprobado");
+    estadoRamos[nombre] = true;
+    div.classList.add("aprobado");
+    div.classList.remove("bloqueado");
     guardarEstado();
 
-    // Desbloquear materias dependientes
     Object.entries(ramos).forEach(([destino, datosDestino]) => {
-      const requisitos = datosDestino.prerequisitos;
-      const seCumplen = requisitos.every(pr => estadoRamos[pr]);
-      const destDiv = document.getElementById(destino);
-      if (destDiv) {
-        if (!estadoRamos[destino] && seCumplen) {
-          destDiv.classList.remove("bloqueado");
-        }
+      if (
+        !estadoRamos[destino] &&
+        datosDestino.prerequisitos.every((pre) => estadoRamos[pre])
+      ) {
+        const destDiv = document.getElementById(destino);
+        if (destDiv) destDiv.classList.remove("bloqueado");
       }
     });
   };
 }
 
 function actualizarContadores() {
-  const totalCreditos = 168; // Valor actualizado
+  const totalCreditos = 168;
   const completados = Object.entries(estadoRamos)
     .filter(([nombre, aprobado]) => aprobado)
     .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
@@ -217,7 +228,7 @@ function actualizarContadores() {
 }
 
 function reiniciarProgreso() {
-  if (confirm("¿Deseas reiniciar tu progreso?")) {
+  if (confirm("¿Deseas reiniciar todo tu progreso?")) {
     Object.keys(estadoRamos).forEach(k => estadoRamos[k] = false);
     guardarEstado();
     location.reload();
@@ -228,8 +239,7 @@ window.onload = () => {
   Object.entries(ramos).forEach(([nombre, datos]) => {
     crearCaja(nombre, datos);
   });
+
   actualizarContadores();
-
   document.getElementById("reset").addEventListener("click", reiniciarProgreso);
-
 };
