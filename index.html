@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malla Curricular - Ingeniería Industrial</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
   <h1>Malla Curricular - Ingeniería Industrial</h1>
+
+  <!-- Contenedor de malla curricular -->
   <div id="malla-container"></div>
 
+  <!-- Bloque de créditos y botón -->
   <div id="footer">
-    <button id="reset" class="btn-red">Reiniciar selección</button>
     <div id="avance">
-      <strong>Créditos completados: <span id="creditos-completados">0</span> / <span id="creditos-totales">132</span> (<span id="porcentaje">0.00</span>%)</strong>
+      <strong>
+        Créditos completados: <span id="creditosCompletados">0</span> / 132 
+        (<span id="porcentajeAvance">0.00</span>%)
+      </strong>
     </div>
+    <button id="botonReiniciar" class="btn-red">Reiniciar progreso</button>
   </div>
-<div id="estado">
-  Créditos completados: <span id="creditosCompletados">0</span> /
-  <span id="porcentajeAvance">0.00</span>% de avance
-</div>
-<button id="botonReiniciar">Reiniciar progreso</button>
 
   <script src="script.js"></script>
 </body>
