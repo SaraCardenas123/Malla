@@ -1,106 +1,117 @@
+/* Estructura general */
 body {
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
   margin: 20px;
-  background-color: #f8f9fa;
+  padding: 0;
   color: #333;
 }
 
 h1 {
   text-align: center;
+  color: #004080;
   margin-bottom: 30px;
 }
 
+/* Contenedor principal */
 #malla-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.semestre {
-  background-color: #fff;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 16px;
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Cada semestre */
+.semestre {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Título del semestre */
 .semestre h2 {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 18px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+  color: #333;
 }
 
+/* Contenedor de ramos en un semestre */
+.contenedor-semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Estilos de los ramos */
 .ramo {
-  border: 2px solid #ccc;
   border-radius: 8px;
   padding: 8px;
-  margin: 8px 0;
-  font-size: 0.9rem;
+  color: white;
+  font-size: 13px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  user-select: none;
 }
 
-.ramo:hover {
-  transform: scale(1.02);
-}
-
+/* Estado bloqueado */
 .bloqueado {
-  background-color: #e0e0e0;
-  color: #888;
+  background-color: #cccccc !important;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* Estado aprobado */
 .aprobado {
-  background-color: #4caf50 !important;
-  color: white !important;
-  border-color: #388e3c;
+  border: 2px solid #2ecc71;
+  box-shadow: 0 0 5px #2ecc71;
 }
 
-/* Colores por tipo */
+/* Colores por tipo de asignatura */
 .fundacion {
-  background-color: #e3f2fd;
-  border-color: #64b5f6;
+  background-color: #3498db;
 }
 
 .disciplinar {
-  background-color: #fff3e0;
-  border-color: #ffb74d;
+  background-color: #9b59b6;
 }
 
 .optativa {
-  background-color: #e8f5e9;
-  border-color: #81c784;
+  background-color: #e67e22;
 }
 
 .libre {
-  background-color: #f3e5f5;
-  border-color: #ba68c8;
+  background-color: #1abc9c;
 }
 
-/* Footer y contadores */
+.trabajo {
+  background-color: #f39c12;
+}
+
+/* Footer con avance */
 #footer {
+  margin-top: 30px;
   text-align: center;
-  margin-top: 20px;
 }
 
 #avance {
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 18px;
   margin-top: 10px;
 }
 
 button {
-  background-color: #d32f2f;
+  background-color: #e74c3c;
   color: white;
-  padding: 10px 16px;
   border: none;
+  padding: 10px 18px;
   border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-  font-size: 0.9rem;
+  margin-top: 10px;
 }
 
 button:hover {
-  background-color: #b71c1c;
+  background-color: #c0392b;
 }
