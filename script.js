@@ -157,6 +157,7 @@ const ramos = {
   "Trabajo de grado": { semestre: 10, creditos: 6, prerequisitos: [] }
 };
   // Agrega el resto de materias aquí con "tipo"
+};
 
 // Tipos: "nivelacion", "fundacion", "disciplinar", "optativa", "libre"
 
