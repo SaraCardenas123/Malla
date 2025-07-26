@@ -156,30 +156,40 @@ const ramos = {
   "Libre elección 9": { semestre: 10, creditos: 3, prerequisitos: [] },
   "Trabajo de grado": { semestre: 10, creditos: 6, prerequisitos: [] }
 };
+  // Agrega el resto de materias aquí con "tipo"
+
+// Tipos: "nivelacion", "fundacion", "disciplinar", "optativa", "libre"
+
+function guardarEstado() {
+  localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
+  actualizarContadores();
+}
 
 function crearSemestres() {
   const container = document.getElementById("malla-container");
   for (let i = 1; i <= 10; i++) {
-    const semestreDiv = document.createElement("div");
-    semestreDiv.className = "semestre";
-    semestreDiv.id = `semestre${i}`;
-    semestreDiv.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
-    container.appendChild(semestreDiv);
+    const columna = document.createElement("div");
+    columna.className = "semestre-columna";
+    columna.id = `semestre${i}`;
+    columna.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
+    container.appendChild(columna);
   }
 }
 
 function crearCaja(nombre, datos) {
   const div = document.createElement("div");
-  div.className = `ramo bloqueado ${datos.tipo}`;
+  div.className = `ramo bloqueado ${datos.tipo || "sin-tipo"}`;
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  const contenedor = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
-  contenedor.appendChild(div);
+  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  if (container) container.appendChild(div);
 
-  if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
+  if (!estadoRamos.hasOwnProperty(nombre)) {
+    estadoRamos[nombre] = false;
+  }
 
-  if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(p => estadoRamos[p])) {
+  if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(pre => estadoRamos[pre])) {
     div.classList.remove("bloqueado");
   }
 
@@ -190,41 +200,38 @@ function crearCaja(nombre, datos) {
 
   div.onclick = () => {
     if (estadoRamos[nombre]) return;
+
     estadoRamos[nombre] = true;
     div.classList.add("aprobado");
     div.classList.remove("bloqueado");
     guardarEstado();
 
-    Object.entries(ramos).forEach(([n, d]) => {
-      const e = document.getElementById(n);
-      if (!estadoRamos[n] && d.prerequisitos.every(p => estadoRamos[p])) {
-        e.classList.remove("bloqueado");
+    Object.entries(ramos).forEach(([destino, datosDestino]) => {
+      if (
+        !estadoRamos[destino] &&
+        datosDestino.prerequisitos.every((pre) => estadoRamos[pre])
+      ) {
+        const destDiv = document.getElementById(destino);
+        if (destDiv) destDiv.classList.remove("bloqueado");
       }
     });
   };
 }
 
-function guardarEstado() {
-  localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
-  actualizarContadores();
-}
-
 function actualizarContadores() {
-  const total = 168;
-  let completados = 0;
+  const totalCreditos = Object.values(ramos).reduce((acc, cur) => acc + cur.creditos, 0);
+  const completados = Object.entries(estadoRamos)
+    .filter(([nombre, aprobado]) => aprobado)
+    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
 
-  for (const [nombre, aprobado] of Object.entries(estadoRamos)) {
-    if (aprobado && ramos[nombre]) {
-      completados += ramos[nombre].creditos;
-    }
-  }
+  const porcentaje = ((completados / totalCreditos) * 100).toFixed(2);
 
-  document.getElementById("creditosCompletados").textContent = completados;
-  document.getElementById("porcentajeAvance").textContent = ((completados / total) * 100).toFixed(2);
+  document.getElementById("creditosCompletados").innerText = completados;
+  document.getElementById("porcentajeAvance").innerText = porcentaje;
 }
 
 function reiniciarProgreso() {
-  if (confirm("¿Deseas reiniciar tu progreso?")) {
+  if (confirm("¿Estás seguro que deseas reiniciar tu progreso?")) {
     Object.keys(estadoRamos).forEach(k => estadoRamos[k] = false);
     guardarEstado();
     location.reload();
@@ -233,7 +240,10 @@ function reiniciarProgreso() {
 
 window.onload = () => {
   crearSemestres();
-  Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
+  Object.entries(ramos).forEach(([nombre, datos]) => {
+    crearCaja(nombre, datos);
+  });
   actualizarContadores();
+
   document.getElementById("botonReiniciar").addEventListener("click", reiniciarProgreso);
 };
