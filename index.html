@@ -8,15 +8,23 @@
 </head>
 <body>
   <h1>Malla Curricular - Ingeniería Industrial</h1>
+
+  <!-- Contenedor de la malla dinámica -->
   <div id="malla-container"></div>
 
+  <!-- Footer con botón de reinicio y resumen de créditos -->
   <div id="footer">
     <button id="botonReiniciar" class="btn-red">Reiniciar progreso</button>
     <div id="avance">
-      <strong>Créditos completados: <span id="creditosCompletados">0</span> / 132 (<span id="porcentajeAvance">0.00</span>%)</strong>
+      <strong>
+        Créditos completados: <span id="creditosCompletados">0</span> / 
+        <span id="creditosTotales">132</span> 
+        (<span id="porcentajeAvance">0.00</span>%)
+      </strong>
     </div>
   </div>
 
+  <!-- Cargar JS -->
   <script src="script.js"></script>
 </body>
 </html>
