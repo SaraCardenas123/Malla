@@ -15,7 +15,28 @@
     h1 {
       text-align: center;
       color: #5a2b90;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c0392b;
     }
 
     .malla {
@@ -79,6 +100,11 @@
 </head>
 <body>
   <h1>Malla Curricular - Ingeniería Industrial</h1>
+
+  <div class="top-bar">
+    <button onclick="reiniciarEstado()">Reiniciar progreso</button>
+  </div>
+
   <div class="malla" id="contenedor-malla"></div>
 
   <script>
@@ -243,6 +269,13 @@
 
     function guardarEstado() {
       localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
+    }
+
+    function reiniciarEstado() {
+      if (confirm("¿Estás seguro de que deseas borrar todo el progreso guardado?")) {
+        localStorage.removeItem("estadoRamos");
+        location.reload();
+      }
     }
 
     function crearSemestres() {
