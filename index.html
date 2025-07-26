@@ -341,10 +341,25 @@
       Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
     };
   </script>
-  <div id="creditos-info">
-  Créditos completados: <span id="creditos-completados">0</span> /
-  <span id="creditos-totales">0</span> (<span id="porcentaje-avance">0</span>%)
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular Interactiva</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <h1>Malla Curricular - Ingeniería Industrial</h1>
+  <div class="fila" id="malla"></div>
 
+  <div class="barra-inferior">
+    <p><strong>Créditos completados:</strong> <span id="creditosCompletados">0</span> / <span id="creditosTotales">0</span></p>
+    <p><strong>Avance:</strong> <span id="porcentajeAvance">0%</span></p>
+    <button id="resetear">Borrar progreso</button>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
