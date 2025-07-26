@@ -7,58 +7,60 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f3ff;
+      background-color: #f9f7ff;
       margin: 0;
       padding: 20px;
-      color: #2f1859;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: #5b2b94;
+      color: #5a2b90;
+      margin-bottom: 30px;
     }
 
     .malla {
       display: flex;
-      gap: 16px;
+      flex-wrap: nowrap;
       overflow-x: auto;
-      padding-bottom: 16px;
+      gap: 16px;
+      padding-bottom: 20px;
     }
 
     .semestre {
-      background-color: #ede3fc;
-      border: 2px solid #c5aaf4;
+      background: #eee4ff;
+      border: 2px solid #c7b5ef;
       border-radius: 12px;
       padding: 12px;
-      min-width: 150px;
+      min-width: 180px;
       flex-shrink: 0;
     }
 
     .semestre h3 {
       text-align: center;
+      color: #5a2b90;
       font-size: 1.1rem;
       margin-bottom: 10px;
-      color: #5b2b94;
+    }
+
+    .contenedor-semestre {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .ramo {
-      background-color: #fff;
-      border: 1.5px solid #ccc;
-      border-radius: 10px;
-      padding: 6px 10px;
-      margin-bottom: 8px;
+      background-color: #ffffff;
+      border: 2px solid #bbb;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       transition: background-color 0.3s, border 0.3s;
     }
 
-    .ramo.aprobado {
-      background-color: #d4edda;
-      border-color: #28a745;
-      color: #155724;
-      font-weight: bold;
+    .ramo span {
+      font-size: 0.8rem;
+      color: #666;
     }
 
     .ramo.bloqueado {
@@ -67,10 +69,11 @@
       cursor: not-allowed;
     }
 
-    .ramo span {
-      font-size: 0.85rem;
-      display: block;
-      color: #555;
+    .ramo.aprobado {
+      background-color: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -252,8 +255,12 @@
 
         const titulo = document.createElement("h3");
         titulo.textContent = `Semestre ${i}`;
-        semestreDiv.appendChild(titulo);
 
+        const contenedorInterno = document.createElement("div");
+        contenedorInterno.className = "contenedor-semestre";
+
+        semestreDiv.appendChild(titulo);
+        semestreDiv.appendChild(contenedorInterno);
         contenedor.appendChild(semestreDiv);
       }
     }
@@ -264,7 +271,7 @@
       div.id = nombre;
       div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-      const container = document.querySelector(`#semestre${datos.semestre}`);
+      const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
       if (container) container.appendChild(div);
 
       if (!estadoRamos.hasOwnProperty(nombre)) {
@@ -281,8 +288,7 @@
       }
 
       div.onclick = () => {
-        if (estadoRamos[nombre]) return;
-        if (div.classList.contains("bloqueado")) return;
+        if (estadoRamos[nombre] || div.classList.contains("bloqueado")) return;
 
         estadoRamos[nombre] = true;
         div.classList.add("aprobado");
