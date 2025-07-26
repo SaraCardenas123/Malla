@@ -1,3 +1,5 @@
+// script.js
+
 const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
 
 const ramos = {
@@ -169,8 +171,17 @@ function crearCaja(nombre, datos) {
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
-  if (container) container.appendChild(div);
+  let contenedor = document.getElementById(`semestre${datos.semestre}`);
+  if (!contenedor) {
+    contenedor = document.createElement("div");
+    contenedor.className = "semestre";
+    contenedor.id = `semestre${datos.semestre}`;
+    contenedor.innerHTML = `<h2>Semestre ${datos.semestre}</h2><div class="contenedor-semestre"></div>`;
+    document.getElementById("malla-container").appendChild(contenedor);
+  }
+
+  const lista = contenedor.querySelector(".contenedor-semestre");
+  lista.appendChild(div);
 
   if (!estadoRamos.hasOwnProperty(nombre)) {
     estadoRamos[nombre] = false;
@@ -186,48 +197,40 @@ function crearCaja(nombre, datos) {
   }
 
   div.onclick = () => {
-    if (div.classList.contains("bloqueado")) return;
+    if (estadoRamos[nombre]) return;
 
     estadoRamos[nombre] = true;
     div.classList.add("aprobado");
     div.classList.remove("bloqueado");
     guardarEstado();
 
-    Object.entries(ramos).forEach(([dest, info]) => {
-      if (!estadoRamos[dest] && info.prerequisitos.every(pre => estadoRamos[pre])) {
-        const destDiv = document.getElementById(dest);
+    Object.entries(ramos).forEach(([destino, datosDestino]) => {
+      if (
+        !estadoRamos[destino] &&
+        datosDestino.prerequisitos.every(pre => estadoRamos[pre])
+      ) {
+        const destDiv = document.getElementById(destino);
         if (destDiv) destDiv.classList.remove("bloqueado");
       }
     });
   };
 }
 
-function crearSemestres() {
-  const container = document.getElementById("malla-container");
-  const totalSemestres = 10;
-  for (let i = 1; i <= totalSemestres; i++) {
-    const div = document.createElement("div");
-    div.className = "semestre";
-    div.id = `semestre${i}`;
-    div.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
-    container.appendChild(div);
-  }
-}
-
 function actualizarContadores() {
   const totalCreditos = Object.values(ramos).reduce((acc, cur) => acc + cur.creditos, 0);
   const completados = Object.entries(estadoRamos)
-    .filter(([nombre, aprobado]) => aprobado)
+    .filter(([_, aprobado]) => aprobado)
     .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
 
   const porcentaje = ((completados / totalCreditos) * 100).toFixed(2);
 
   document.getElementById("creditosCompletados").innerText = completados;
   document.getElementById("porcentajeAvance").innerText = porcentaje;
+  document.getElementById("creditosTotales").innerText = totalCreditos;
 }
 
 function reiniciarProgreso() {
-  if (confirm("¿Reiniciar progreso?")) {
+  if (confirm("¿Estás seguro que deseas reiniciar tu progreso?")) {
     Object.keys(estadoRamos).forEach(k => estadoRamos[k] = false);
     guardarEstado();
     location.reload();
@@ -235,7 +238,6 @@ function reiniciarProgreso() {
 }
 
 window.onload = () => {
-  crearSemestres();
   Object.entries(ramos).forEach(([nombre, datos]) => {
     crearCaja(nombre, datos);
   });
