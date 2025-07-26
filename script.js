@@ -1,4 +1,4 @@
-const ramos = {
+const malla = {
     "Cálculo Diferencial": {
     semestre: 1, creditos: 4, prerequisitos: [],
     desbloquea: ["Álgebra Lineal", "Taller de Herramientas y Problemas", "Fundamentos de Mecánica", "Economía General", "Cálculo Integral"]
@@ -155,86 +155,79 @@ const ramos = {
   "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
 };
 
-// Estado guardado en localStorage
-const estadoRamos = JSON.parse(localStorage.getItem("estadoRamos")) || {};
+const totalCreditos = Object.values(malla).flat().reduce((acc, mat) => acc + mat.creditos, 0);
 
-const totalCreditos = Object.values(ramos).reduce((acc, ramo) => acc + ramo.creditos, 0);
-document.getElementById("creditos-totales").textContent = totalCreditos;
+const materiasCompletadas = JSON.parse(localStorage.getItem("materiasCompletadas") || "[]");
 
-function guardarEstado() {
-  localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
-  actualizarProgreso();
-}
-
-function crearCaja(nombre, datos) {
-  const div = document.createElement("div");
-  div.className = "ramo bloqueado";
-  div.id = nombre;
-  div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
-
-  if (!estadoRamos.hasOwnProperty(nombre)) {
-    estadoRamos[nombre] = false;
-  }
-
-  if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(pre => estadoRamos[pre])) {
-    div.classList.remove("bloqueado");
-  }
-
-  if (estadoRamos[nombre]) {
-    div.classList.add("aprobado");
-    div.classList.remove("bloqueado");
-  }
-
-  div.onclick = () => {
-    if (estadoRamos[nombre]) return;
-
-    estadoRamos[nombre] = true;
-    div.classList.add("aprobado");
-    guardarEstado();
-
-    Object.entries(ramos).forEach(([destino, datosDestino]) => {
-      if (!estadoRamos[destino] && datosDestino.prerequisitos.every(pre => estadoRamos[pre])) {
-        const destDiv = document.getElementById(destino);
-        if (destDiv) destDiv.classList.remove("bloqueado");
-      }
-    });
-  };
-
-  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
-  if (container) container.appendChild(div);
-}
-
-function actualizarProgreso() {
-  const creditosCompletados = Object.entries(estadoRamos)
-    .filter(([nombre, aprobado]) => aprobado)
-    .reduce((acc, [nombre]) => acc + (ramos[nombre]?.creditos || 0), 0);
-
-  document.getElementById("creditos-completados").textContent = creditosCompletados;
-  const porcentaje = Math.round((creditosCompletados / totalCreditos) * 100);
-  document.getElementById("porcentaje-avance").textContent = `${porcentaje}%`;
-}
-
-function construirSemestres() {
+function crearMalla() {
   const contenedor = document.getElementById("contenedor-malla");
-  for (let i = 1; i <= 10; i++) {
+  contenedor.innerHTML = "";
+
+  for (let semestre in malla) {
     const columna = document.createElement("div");
     columna.className = "semestre";
-    columna.id = `semestre${i}`;
-    columna.innerHTML = `<h2>Semestre ${i}</h2><div class="contenedor-semestre"></div>`;
+
+    const titulo = document.createElement("h2");
+    titulo.textContent = `Semestre ${semestre}`;
+    columna.appendChild(titulo);
+
+    malla[semestre].forEach(materia => {
+      const div = document.createElement("div");
+      div.className = "materia";
+      div.dataset.id = materia.id;
+      div.dataset.creditos = materia.creditos;
+      div.textContent = `${materia.nombre}\n${materia.creditos} créditos`;
+
+      if (materiasCompletadas.includes(materia.id)) {
+        div.classList.add("completada");
+      } else if (!cumplePrerequisitos(materia)) {
+        div.classList.add("bloqueada");
+      }
+
+      div.addEventListener("click", () => toggleMateria(div, materia));
+      columna.appendChild(div);
+    });
+
     contenedor.appendChild(columna);
   }
+
+  actualizarContador();
 }
 
-document.getElementById("reiniciar").onclick = () => {
-  if (confirm("¿Seguro que deseas reiniciar tu progreso?")) {
-    Object.keys(estadoRamos).forEach(r => estadoRamos[r] = false);
-    guardarEstado();
-    location.reload();
-  }
-};
+function cumplePrerequisitos(materia) {
+  if (!materia.prerequisitos) return true;
+  return materia.prerequisitos.every(id => materiasCompletadas.includes(id));
+}
 
-window.onload = () => {
-  construirSemestres();
-  Object.entries(ramos).forEach(([nombre, datos]) => crearCaja(nombre, datos));
-  actualizarProgreso();
-};
+function toggleMateria(div, materia) {
+  if (div.classList.contains("bloqueada")) return;
+
+  const index = materiasCompletadas.indexOf(materia.id);
+  if (index === -1) {
+    materiasCompletadas.push(materia.id);
+  } else {
+    materiasCompletadas.splice(index, 1);
+  }
+
+  localStorage.setItem("materiasCompletadas", JSON.stringify(materiasCompletadas));
+  crearMalla(); // Redibuja todo para aplicar cambios de prerequisitos
+}
+
+function actualizarContador() {
+  const contador = document.getElementById("contador-creditos");
+  const creditos = Object.values(malla)
+    .flat()
+    .filter(mat => materiasCompletadas.includes(mat.id))
+    .reduce((acc, mat) => acc + mat.creditos, 0);
+
+  const porcentaje = ((creditos / totalCreditos) * 100).toFixed(0);
+
+  contador.textContent = `Créditos completados: ${creditos} / ${totalCreditos} (${porcentaje}%)`;
+}
+
+document.getElementById("btn-reiniciar").addEventListener("click", () => {
+  localStorage.removeItem("materiasCompletadas");
+  location.reload();
+});
+
+crearMalla();
