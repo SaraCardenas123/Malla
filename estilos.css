@@ -1,58 +1,89 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #f4f4f4;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f5fc;
+  margin: 0;
+  padding: 0;
   color: #333;
 }
 
 h1 {
   text-align: center;
+  padding: 1rem;
+  color: #5e2ca5;
 }
 
-#estado {
-  margin: 20px 0;
-  font-size: 18px;
-  text-align: center;
-}
-
-button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-#botonReiniciar {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.ramo {
-  border: 1px solid #ccc;
-  padding: 8px;
-  margin: 5px;
-  border-radius: 5px;
-  background-color: #e0e0e0;
-  cursor: pointer;
-  width: fit-content;
-}
-
-.ramo.aprobado {
-  background-color: #5cb85c;
-  color: white;
-}
-
-.ramo.bloqueado {
-  background-color: #ccc;
-  color: #666;
-  cursor: not-allowed;
-}
-
-#semestre-container {
+.fila {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.semestre {
+  background-color: #ebe3f7;
+  border: 2px solid #cbb6f3;
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 250px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.semestre h2 {
+  font-size: 1.1rem;
+  color: #5e2ca5;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.contenedor-semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+.ramo {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 90%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.aprobado {
+  border: 2px solid #4caf50;
+  background-color: #d2f4d2 !important;
+}
+
+.bloqueado {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+#footer {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.btn-red {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-red:hover {
+  background-color: #c0392b;
 }
