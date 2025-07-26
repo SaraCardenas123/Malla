@@ -1,92 +1,102 @@
+:root {
+  --color-fundacion: #A7D8DE;
+  --color-disciplinar: #FCD5CE;
+  --color-libre: #C5E1A5;
+  --color-trabajo: #FFE082;
+  --color-bloqueado: #ddd;
+  --color-aprobado: #81C784;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  background: #f7f7f7;
   margin: 0;
-  padding: 20px;
-  color: #333;
+  padding: 0;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2c3e50;
+  margin: 20px 0;
 }
 
 #malla-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 20px;
   gap: 20px;
+  justify-content: flex-start;
 }
 
 .semestre {
-  background-color: #ffffff;
-  border: 2px solid #dcdcdc;
-  border-radius: 12px;
-  padding: 15px;
-  width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 200px;
 }
 
-.semestre h2 {
-  text-align: center;
+.semestre h3 {
   margin-top: 0;
-  font-size: 18px;
-  color: #34495e;
-}
-
-.contenedor-semestre {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  font-size: 1.2em;
 }
 
 .ramo {
-  padding: 10px;
+  border: 1px solid #aaa;
   border-radius: 8px;
-  background-color: #ecf0f1;
-  border: 1px solid #bdc3c7;
+  padding: 6px;
+  margin: 6px 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s;
 }
 
-.ramo:hover {
-  background-color: #d0e4f7;
+.fundacion {
+  background-color: var(--color-fundacion);
 }
 
-.ramo.aprobado {
-  background-color: #2ecc71;
-  color: white;
-  font-weight: bold;
-  border-color: #27ae60;
+.disciplinar {
+  background-color: var(--color-disciplinar);
 }
 
-.ramo.bloqueado {
-  background-color: #e0e0e0;
+.libre {
+  background-color: var(--color-libre);
+}
+
+.trabajo {
+  background-color: var(--color-trabajo);
+}
+
+.bloqueado {
+  background-color: var(--color-bloqueado) !important;
   color: #999;
   cursor: not-allowed;
 }
 
-#footer {
-  margin-top: 40px;
-  text-align: center;
+.aprobado {
+  background-color: var(--color-aprobado) !important;
+  text-decoration: line-through;
 }
 
-#avance {
-  font-size: 18px;
-  margin-top: 10px;
+#footer {
+  margin: 20px;
 }
 
 #botonReiniciar {
-  padding: 10px 20px;
-  background-color: #e74c3c;
-  color: white;
+  padding: 8px 16px;
+  font-size: 1em;
+  background-color: #e57373;
   border: none;
   border-radius: 6px;
+  color: white;
   cursor: pointer;
-  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 #botonReiniciar:hover {
-  background-color: #c0392b;
+  background-color: #d32f2f;
+}
+
+#avance {
+  margin-top: 10px;
+  font-weight: bold;
 }
