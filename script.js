@@ -156,8 +156,6 @@ const ramos = {
   "Libre elección 9": { semestre: 10, creditos: 2, prerequisitos: [] },
   "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
 };
-
-
 function guardarEstado() {
   localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
 }
@@ -167,13 +165,10 @@ function crearCaja(nombre, datos) {
   div.className = "ramo bloqueado";
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
-  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
-  if (container) container.appendChild(div);
 
-  if (!estadoRamos.hasOwnProperty(nombre)) {
-    estadoRamos[nombre] = false;
-  }
+  if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
 
+  // Habilitar si no tiene prerequisitos o ya se cumplieron
   if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(pre => estadoRamos[pre])) {
     div.classList.remove("bloqueado");
   }
@@ -185,26 +180,43 @@ function crearCaja(nombre, datos) {
 
   div.onclick = () => {
     if (estadoRamos[nombre]) return;
-
     estadoRamos[nombre] = true;
     div.classList.add("aprobado");
     guardarEstado();
-
-    Object.entries(ramos).forEach(([destino, datosDestino]) => {
-      if (
-        !estadoRamos[destino] &&
-        datosDestino.prerequisitos.every((pre) => estadoRamos[pre])
-      ) {
-        const destDiv = document.getElementById(destino);
-        if (destDiv) destDiv.classList.remove("bloqueado");
-      }
-    });
+    actualizarDisponibles();
   };
+
+  return div;
+}
+
+function crearSemestre(numero) {
+  const div = document.createElement("div");
+  div.className = "semestre";
+  div.innerHTML = `<h2>Semestre ${numero}</h2><div class="contenedor-semestre" id="s${numero}"></div>`;
+  return div;
+}
+
+function actualizarDisponibles() {
+  Object.entries(ramos).forEach(([nombre, datos]) => {
+    const div = document.getElementById(nombre);
+    if (!estadoRamos[nombre] && datos.prerequisitos.every(pre => estadoRamos[pre])) {
+      div.classList.remove("bloqueado");
+    }
+  });
 }
 
 window.onload = () => {
+  const contenedor = document.getElementById("contenedor-semestres");
+
+  // Crear semestres
+  const maxSemestre = Math.max(...Object.values(ramos).map(r => r.semestre));
+  for (let i = 1; i <= maxSemestre; i++) {
+    contenedor.appendChild(crearSemestre(i));
+  }
+
+  // Crear ramos
   Object.entries(ramos).forEach(([nombre, datos]) => {
-    crearCaja(nombre, datos);
+    const div = crearCaja(nombre, datos);
+    document.getElementById(`s${datos.semestre}`).appendChild(div);
   });
-    desbloquearRamos();
 };
