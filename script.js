@@ -157,7 +157,6 @@ const ramos = {
   "Trabajo de grado": { semestre: 10, creditos: 6, prerequisitos: [] }
 };
 
-// Crea contenedores por semestre
 function crearSemestres() {
   const container = document.getElementById("malla-container");
   for (let i = 1; i <= 10; i++) {
@@ -169,22 +168,18 @@ function crearSemestres() {
   }
 }
 
-// Agrega cada materia a su semestre
 function crearCaja(nombre, datos) {
   const div = document.createElement("div");
-  div.className = "ramo bloqueado";
+  div.className = `ramo bloqueado ${datos.tipo}`;
   div.id = nombre;
   div.innerHTML = `<strong>${nombre}</strong><br><span>${datos.creditos} créditos</span>`;
 
-  const container = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
-  container.appendChild(div);
+  const contenedor = document.querySelector(`#semestre${datos.semestre} .contenedor-semestre`);
+  contenedor.appendChild(div);
 
   if (!estadoRamos.hasOwnProperty(nombre)) estadoRamos[nombre] = false;
 
-  if (
-    datos.prerequisitos.length === 0 ||
-    datos.prerequisitos.every(p => estadoRamos[p])
-  ) {
+  if (datos.prerequisitos.length === 0 || datos.prerequisitos.every(p => estadoRamos[p])) {
     div.classList.remove("bloqueado");
   }
 
@@ -200,25 +195,20 @@ function crearCaja(nombre, datos) {
     div.classList.remove("bloqueado");
     guardarEstado();
 
-    Object.entries(ramos).forEach(([nombre, datos]) => {
-      const div = document.getElementById(nombre);
-      if (
-        !estadoRamos[nombre] &&
-        datos.prerequisitos.every(p => estadoRamos[p])
-      ) {
-        div.classList.remove("bloqueado");
+    Object.entries(ramos).forEach(([n, d]) => {
+      const e = document.getElementById(n);
+      if (!estadoRamos[n] && d.prerequisitos.every(p => estadoRamos[p])) {
+        e.classList.remove("bloqueado");
       }
     });
   };
 }
 
-// Guardar progreso
 function guardarEstado() {
   localStorage.setItem("estadoRamos", JSON.stringify(estadoRamos));
   actualizarContadores();
 }
 
-// Contador de créditos
 function actualizarContadores() {
   const total = 168;
   let completados = 0;
@@ -233,9 +223,8 @@ function actualizarContadores() {
   document.getElementById("porcentajeAvance").textContent = ((completados / total) * 100).toFixed(2);
 }
 
-// Reinicio
 function reiniciarProgreso() {
-  if (confirm("¿Quieres reiniciar tu progreso?")) {
+  if (confirm("¿Deseas reiniciar tu progreso?")) {
     Object.keys(estadoRamos).forEach(k => estadoRamos[k] = false);
     guardarEstado();
     location.reload();
