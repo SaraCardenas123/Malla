@@ -1,98 +1,121 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #faf8ff;
+/* Reset básico */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #333;
 }
 
+/* Estilos generales */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f6fc;
+  color: #333;
+  padding: 20px;
+}
+
+/* Título */
 h1 {
   text-align: center;
-  padding: 20px;
-  color: #5e2b88;
+  margin-bottom: 30px;
+  color: #5e3a78;
 }
 
+/* Contenedor de la malla */
 #malla-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  gap: 12px;
-  padding: 20px;
 }
 
-.ramo {
-  width: 180px;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+/* Contenedor de cada semestre */
+.semestre {
+  background-color: #eee9f3;
+  border-radius: 10px;
+  padding: 10px;
+  width: 280px;
+}
+
+.semestre h2 {
   text-align: center;
-  transition: transform 0.2s, background-color 0.3s;
-  border: 2px solid transparent;
+  margin-bottom: 10px;
+  color: #5e3a78;
+}
+
+/* Bloques de ramos */
+.ramo {
+  background-color: #d8c7e5;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 6px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .ramo:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
-/* Estados */
+/* Estado de bloqueado */
 .ramo.bloqueado {
+  background-color: #e6e0ec;
   opacity: 0.5;
   cursor: not-allowed;
 }
 
+/* Estado de aprobado */
 .ramo.aprobado {
-  border: 2px solid #4a2a69;
-  text-decoration: line-through;
+  background-color: #b18fd7;
+  color: white;
+  font-weight: bold;
 }
 
-/* Tipos de asignatura */
+/* Tipo de asignatura */
 .fundacion {
-  background-color: #e6ccff;
+  background-color: #e2d4f0;
 }
 
 .disciplinar {
-  background-color: #d1b3ff;
+  background-color: #d3bce5;
 }
 
 .optativa {
-  background-color: #caa6ff;
+  background-color: #f1dbf5;
 }
 
 .libre {
-  background-color: #e0ccff;
+  background-color: #ecdff5;
 }
 
 .trabajo {
-  background-color: #b399ff;
+  background-color: #c5a3e8;
 }
 
+/* Footer */
 #footer {
-  background-color: #f3eaff;
-  padding: 15px;
+  margin-top: 30px;
   text-align: center;
-  position: sticky;
-  bottom: 0;
-  border-top: 2px solid #ccc;
-}
-
-#botonReiniciar {
-  background-color: #915ac1;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-#botonReiniciar:hover {
-  background-color: #7b49a6;
 }
 
 #avance {
-  font-weight: bold;
-  font-size: 16px;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #5e3a78;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #a277d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #8b5db7;
 }
