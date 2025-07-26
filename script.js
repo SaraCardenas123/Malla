@@ -19,11 +19,11 @@ const malla = {
     desbloquea: ["Cálculo en Varias Variables", "Fundamentos de Electricidad y Magnetismo", "Ecuaciones Diferenciales", "Probabilidad Fundamental"]
   },
   "Álgebra Lineal": {
-    semestre: 2, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
+    semestre: 2, creditos: 4, prerequisitos: ["Cálculo Diferencial"],
     desbloquea: ["Ecuaciones Diferenciales", "Optimización"]
   },
   "Taller de Invención y Creatividad": {
-    semestre: 2, creditos: 2, prerequisitos: ["Introducción a la Ingeniería Industrial"],
+    semestre: 2, creditos: 3, prerequisitos: ["Introducción a la Ingeniería Industrial"],
     desbloquea: ["Gestión Empresarial"]
   },
   "Programación Orientada a Objetos": {
@@ -31,14 +31,14 @@ const malla = {
     desbloquea: ["Taller de Herramientas y Problemas"]
   },
   "Libre elección 1": {
-    semestre: 2, creditos: 2, prerequisitos: []
+    semestre: 2, creditos: 3, prerequisitos: []
   },
   "Cálculo en Varias Variables": {
     semestre: 3, creditos: 4, prerequisitos: ["Cálculo Integral"],
     desbloquea: ["Ingeniería Económica y Análisis de Riesgo", "Optimización", "Modelos y Simulación"]
   },
   "Fundamentos de Mecánica": {
-    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial"],
+    semestre: 3, creditos: 4, prerequisitos: ["Cálculo Diferencial"],
     desbloquea: ["Taller Ciencia y Tecnología Materiales", "Fundamentos de Electricidad y Magnetismo"]
   },
   "Economía General": {
@@ -46,34 +46,34 @@ const malla = {
     desbloquea: ["Gestión Empresarial", "Sistema de Costos"]
   },
   "Taller de Herramientas y Problemas": {
-    semestre: 3, creditos: 2, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial", "Programación Orientada a Objetos"],
+    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Diferencial", "Introducción a la Ingeniería Industrial", "Programación Orientada a Objetos"],
     desbloquea: ["Sistema de Costos", "Modelos y Simulación"]
   },
   "Probabilidad Fundamental": {
-    semestre: 3, creditos: 3, prerequisitos: ["Cálculo Integral"],
+    semestre: 3, creditos: 4, prerequisitos: ["Cálculo Integral"],
     desbloquea: ["Modelos y Simulación", "Inferencia Estadística Fundamental"]
   },
   "Ecuaciones Diferenciales": {
-    semestre: 4, creditos: 3, prerequisitos: ["Álgebra Lineal", "Cálculo Integral"],
+    semestre: 4, creditos: 4, prerequisitos: ["Álgebra Lineal", "Cálculo Integral"],
     desbloquea: ["Modelos y Simulación"]
   },
   "Fundamentos de Electricidad y Magnetismo": {
-    semestre: 4, creditos: 3, prerequisitos: ["Cálculo Integral"],
+    semestre: 4, creditos: 4, prerequisitos: ["Cálculo Integral"],
     desbloquea: ["Seguridad Industrial"]
   },
   "Sistema de Costos": {
-    semestre: 4, creditos: 3, prerequisitos: ["Taller de Herramientas y Problemas"],
+    semestre: 4, creditos: 4, prerequisitos: ["Taller de Herramientas y Problemas"],
     desbloquea: ["Ingeniería Económica y Análisis de Riesgo"]
   },
   "Gestión Empresarial": {
     semestre: 4, creditos: 3, prerequisitos: ["Taller de Invención y Creatividad", "Economía General"]
   },
   "Taller Ciencia y Tecnología Materiales": {
-    semestre: 4, creditos: 2, prerequisitos: ["Fundamentos de Mecánica"],
+    semestre: 4, creditos: 4, prerequisitos: ["Fundamentos de Mecánica"],
     desbloquea: ["Taller de Procesos Químicos y Biotecnológicos", "Taller de Procesos Metalmecánicos"]
   },
   "Modelos y Simulación": {
-    semestre: 5, creditos: 4, prerequisitos: ["Cálculo en Varias Variables", "Taller de Herramientas y Problemas", "Ecuaciones Diferenciales", "Probabilidad Fundamental"],
+    semestre: 5, creditos: 3, prerequisitos: ["Cálculo en Varias Variables", "Taller de Herramientas y Problemas", "Ecuaciones Diferenciales", "Probabilidad Fundamental"],
     desbloquea: ["Modelos Estocásticos"]
   },
   "Optimización": {
@@ -85,14 +85,14 @@ const malla = {
     desbloquea: ["Finanzas", "Gerencia y Gestión de Proyectos"]
   },
   "Taller de Procesos Químicos y Biotecnológicos": {
-    semestre: 5, creditos: 2, prerequisitos: ["Taller Ciencia y Tecnología Materiales"]
+    semestre: 5, creditos: 3, prerequisitos: ["Taller Ciencia y Tecnología Materiales"]
   },
   "Taller de Procesos Metalmecánicos": {
-    semestre: 5, creditos: 2, prerequisitos: ["Taller Ciencia y Tecnología Materiales"],
+    semestre: 5, creditos: 3, prerequisitos: ["Taller Ciencia y Tecnología Materiales"],
     desbloquea: ["Taller Ergonomía e Ingeniería de Métodos"]
   },
   "Inferencia Estadística Fundamental": {
-    semestre: 5, creditos: 3, prerequisitos: ["Probabilidad Fundamental"],
+    semestre: 5, creditos: 4, prerequisitos: ["Probabilidad Fundamental"],
     desbloquea: ["Control y Gestión Calidad", "Modelos Estocásticos", "Taller Metodología Investigación"]
   },
   "Modelos Estocásticos": {
@@ -107,14 +107,14 @@ const malla = {
     semestre: 6, creditos: 3, prerequisitos: ["Ingeniería Económica y Análisis de Riesgo"]
   },
   "Taller Ergonomía e Ingeniería de Métodos": {
-    semestre: 6, creditos: 2, prerequisitos: ["Optimización", "Taller de Procesos Metalmecánicos"],
+    semestre: 6, creditos: 4, prerequisitos: ["Optimización", "Taller de Procesos Metalmecánicos"],
     desbloquea: ["Taller Ingeniería de Producción"]
   },
   "Control y Gestión Calidad": {
     semestre: 6, creditos: 3, prerequisitos: ["Inferencia Estadística Fundamental"]
   },
   "Taller Simulación Procesos": {
-    semestre: 7, creditos: 2, prerequisitos: ["Modelos Estocásticos"],
+    semestre: 7, creditos: 3, prerequisitos: ["Modelos Estocásticos"],
     desbloquea: ["Logística"]
   },
   "Sistemas de Información": {
@@ -122,11 +122,11 @@ const malla = {
     desbloquea: ["Taller Diseño Plantas", "Gestión Tecnológica"]
   },
   "Seguridad Industrial": {
-    semestre: 7, creditos: 2, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
+    semestre: 7, creditos: 3, prerequisitos: ["Fundamentos de Electricidad y Magnetismo"],
     desbloquea: ["Taller Diseño Plantas", "Gerencia de Recursos Humanos"]
   },
   "Taller Ingeniería de Producción": {
-    semestre: 7, creditos: 3, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
+    semestre: 7, creditos: 4, prerequisitos: ["Taller Ergonomía e Ingeniería de Métodos", "Modelos Estocásticos"],
     desbloquea: ["Taller Diseño Plantas"]
   },
   "Taller Metodología Investigación": {
@@ -136,23 +136,23 @@ const malla = {
     semestre: 8, creditos: 3, prerequisitos: ["Taller Simulación Procesos"]
   },
   "Gestión Tecnológica": {
-    semestre: 8, creditos: 2, prerequisitos: ["Sistemas de Información"]
+    semestre: 8, creditos: 3, prerequisitos: ["Sistemas de Información"]
   },
   "Gerencia de Recursos Humanos": {
     semestre: 8, creditos: 3, prerequisitos: ["Seguridad Industrial"]
   },
   "Taller Diseño Plantas": {
-    semestre: 8, creditos: 3, prerequisitos: ["Taller Ingeniería de Producción", "Seguridad Industrial", "Sistemas de Información"]
+    semestre: 8, creditos: 4, prerequisitos: ["Taller Ingeniería de Producción", "Seguridad Industrial", "Sistemas de Información"]
   },
-  "Libre elección 2": { semestre: 8, creditos: 2, prerequisitos: [] },
-  "Libre elección 3": { semestre: 9, creditos: 2, prerequisitos: [] },
-  "Libre elección 4": { semestre: 9, creditos: 2, prerequisitos: [] },
-  "Libre elección 5": { semestre: 9, creditos: 2, prerequisitos: [] },
-  "Libre elección 6": { semestre: 9, creditos: 2, prerequisitos: [] },
-  "Libre elección 7": { semestre: 10, creditos: 2, prerequisitos: [] },
-  "Libre elección 8": { semestre: 10, creditos: 2, prerequisitos: [] },
-  "Libre elección 9": { semestre: 10, creditos: 2, prerequisitos: [] },
-  "Trabajo de grado": { semestre: 10, creditos: 5, prerequisitos: [] }
+  "Libre elección 2": { semestre: 8, creditos: 4, prerequisitos: [] },
+  "Libre elección 3": { semestre: 9, creditos: 4, prerequisitos: [] },
+  "Libre elección 4": { semestre: 9, creditos: 4, prerequisitos: [] },
+  "Libre elección 5": { semestre: 9, creditos: 4, prerequisitos: [] },
+  "Libre elección 6": { semestre: 9, creditos: 4, prerequisitos: [] },
+  "Libre elección 7": { semestre: 10, creditos: 4, prerequisitos: [] },
+  "Libre elección 8": { semestre: 10, creditos: 4, prerequisitos: [] },
+  "Libre elección 9": { semestre: 10, creditos: 3, prerequisitos: [] },
+  "Trabajo de grado": { semestre: 10, creditos: 6, prerequisitos: [] }
 };
 
 const totalCreditos = Object.values(malla).flat().reduce((acc, mat) => acc + mat.creditos, 0);
