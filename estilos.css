@@ -1,122 +1,85 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f5fc;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
   margin: 0;
-  padding: 0;
-  color: #333;
+  padding: 0 20px;
 }
 
 h1 {
   text-align: center;
-  padding: 1rem;
-  color: #5e2ca5;
+  margin-top: 20px;
+  font-size: 2em;
 }
 
-.fila {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+#avance {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.2em;
+}
+
+button#botonReiniciar {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 10px 20px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button#botonReiniciar:hover {
+  background-color: #b71c1c;
 }
 
 .semestre {
-  background-color: #ebe3f7;
-  border: 2px solid #cbb6f3;
+  background-color: #eeeeee;
   border-radius: 10px;
-  padding: 0.5rem;
-  width: 250px;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  padding: 15px;
 }
 
 .semestre h2 {
-  font-size: 1.1rem;
-  color: #5e2ca5;
-  margin-bottom: 0.5rem;
-  text-align: center;
+  margin-top: 0;
+  font-size: 1.5em;
 }
 
 .contenedor-semestre {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-  align-items: center;
+  gap: 10px;
 }
 
 .ramo {
-  padding: 0.5rem;
-  text-align: center;
-  border: 1px solid #ccc;
+  padding: 12px;
   border-radius: 8px;
-  width: 90%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-}
-
-/* Componentes por color */
-.fund {
-  background-color: #d9c8f7;
-}
-
-.disc {
-  background-color: #c9aef7;
-}
-
-.opt {
-  background-color: #ebd6ff;
-}
-
-.trab {
-  background-color: #f3ccff;
-}
-
-/* Estado de aprobación */
-.aprobado {
-  border: 2px solid #4caf50;
-  background-color: #d2f4d2 !important;
-}
-
-.bloqueado {
-  opacity: 0.4;
-  pointer-events: none;
-  filter: grayscale(100%);
-}
-
-/* Footer y botones */
-#footer {
-  margin-top: 30px;
-  padding: 1rem;
   text-align: center;
-  background-color: #f2edf8;
-  border-top: 1px solid #ccc;
-}
-
-button {
-  padding: 10px 15px;
-  margin: 10px;
-  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
   cursor: pointer;
-  border: none;
-  border-radius: 5px;
+  transition: transform 0.2s;
 }
 
-.btn-red {
-  background-color: #e74c3c;
+.ramo:hover {
+  transform: scale(1.03);
+}
+
+.ramo.aprobado {
+  background-color: #388e3c;
   color: white;
 }
 
-.btn-red:hover {
-  background-color: #c0392b;
+.ramo.bloqueado {
+  background-color: #bdbdbd;
+  color: #333;
+  cursor: not-allowed;
 }
 
-#estado {
-  font-weight: bold;
-  margin-top: 10px;
-}
+/* Colores por componente (puedes adaptar según el tipo) */
+.ramo.fundacion { background-color: #1976d2; }
+.ramo.disciplinar { background-color: #6a1b9a; }
+.ramo.optativa { background-color: #f57c00; }
+.ramo.libre { background-color: #00796b; }
+.ramo.trabajo { background-color: #5d4037; }
