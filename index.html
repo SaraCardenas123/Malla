@@ -1,107 +1,24 @@
-:root {
-  --color-fundacion: #E1C6FF;      /* Morado claro pastel */
-  --color-disciplinar: #D0B0FF;    /* Morado medio pastel */
-  --color-libre: #E6D3FF;          /* Lavanda suave */
-  --color-trabajo: #DCC6FF;        /* Lila claro */
-  --color-bloqueado: #f0f0f0;
-  --color-aprobado: #b6ffcb;       /* Verde menta claro */
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Curricular - Ingeniería Industrial</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <h1>Malla Curricular - Ingeniería Industrial</h1>
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fdfaff;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
+  <div id="malla-container"></div>
 
-h1 {
-  margin-top: 20px;
-  font-size: 1.8em;
-}
+  <div id="footer">
+    <button id="botonReiniciar">Reiniciar progreso</button>
+    <div id="avance">
+      Créditos completados: <span id="creditosCompletados">0</span> / 168
+      (<span id="porcentajeAvance">0.00</span>%)
+    </div>
+  </div>
 
-#malla-container {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 20px;
-  gap: 20px;
-  justify-content: flex-start;
-}
-
-.semestre {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 12px;
-  min-width: 220px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.semestre h2 {
-  margin-top: 0;
-  font-size: 1.4em;
-}
-
-.ramo {
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px 0;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-/* Tipos de ramos */
-.fundacion {
-  background-color: var(--color-fundacion);
-}
-
-.disciplinar {
-  background-color: var(--color-disciplinar);
-}
-
-.libre {
-  background-color: var(--color-libre);
-}
-
-.trabajo {
-  background-color: var(--color-trabajo);
-}
-
-.bloqueado {
-  background-color: var(--color-bloqueado) !important;
-  color: #aaa;
-  text-decoration: none;
-  cursor: not-allowed;
-}
-
-.aprobado {
-  background-color: var(--color-aprobado) !important;
-  text-decoration: line-through;
-  opacity: 0.8;
-}
-
-#footer {
-  margin: 20px;
-}
-
-#botonReiniciar {
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #ce93d8;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  cursor: pointer;
-}
-
-#botonReiniciar:hover {
-  background-color: #ab47bc;
-}
-
-#avance {
-  margin-top: 10px;
-  font-weight: bold;
-}
+  <script src="script.js"></script>
+</body>
+</html>
