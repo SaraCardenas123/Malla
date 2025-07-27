@@ -1,25 +1,23 @@
 :root {
-  --color-fundacion: #E0BBE4;      /* Lavanda claro */
-  --color-disciplinar: #DCC6E0;    /* Lila suave */
-  --color-libre: #CBAACB;          /* Morado pastel */
-  --color-trabajo: #B5AED7;        /* Morado grisáceo */
-  --color-bloqueado: #EDE7F6;      /* Lavanda muy claro */
-  --color-aprobado: #CE93D8;       /* Morado claro más intenso */
-  --color-fondo: #f5ebf7;          /* Fondo general */
-  --color-semestre: #ffffff;       /* Fondo columna semestre */
+  --color-fundacion: #E1C6FF;      /* Morado claro pastel */
+  --color-disciplinar: #D0B0FF;    /* Morado medio pastel */
+  --color-libre: #E6D3FF;          /* Lavanda suave */
+  --color-trabajo: #DCC6FF;        /* Lila claro */
+  --color-bloqueado: #f0f0f0;
+  --color-aprobado: #b6ffcb;       /* Verde menta claro */
 }
 
 body {
   font-family: Arial, sans-serif;
-  background: var(--color-fondo);
+  background-color: #fdfaff;
   margin: 0;
   padding: 0;
   text-align: center;
 }
 
 h1 {
-  margin: 20px 0;
-  color: #4a148c;
+  margin-top: 20px;
+  font-size: 1.8em;
 }
 
 #malla-container {
@@ -32,36 +30,30 @@ h1 {
 }
 
 .semestre {
-  background: var(--color-semestre);
-  border: 1px solid #d1c4e9;
+  background-color: white;
+  border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 10px;
+  padding: 12px;
   min-width: 220px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .semestre h2 {
+  margin-top: 0;
   font-size: 1.4em;
-  margin-bottom: 10px;
-  color: #6a1b9a;
 }
 
 .ramo {
-  border: 1px solid #b39ddb;
   border-radius: 10px;
   padding: 10px;
-  margin: 8px 0;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  margin: 10px 0;
   font-weight: bold;
-  color: #212121;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-.ramo:hover {
-  transform: scale(1.02);
-}
-
-/* Tipos de asignatura */
+/* Tipos de ramos */
 .fundacion {
   background-color: var(--color-fundacion);
 }
@@ -78,21 +70,19 @@ h1 {
   background-color: var(--color-trabajo);
 }
 
-/* Estados */
 .bloqueado {
   background-color: var(--color-bloqueado) !important;
-  color: #999;
+  color: #aaa;
+  text-decoration: none;
   cursor: not-allowed;
-  border-style: dashed;
 }
 
 .aprobado {
   background-color: var(--color-aprobado) !important;
   text-decoration: line-through;
-  color: white;
+  opacity: 0.8;
 }
 
-/* Botón de reinicio */
 #footer {
   margin: 20px;
 }
@@ -100,21 +90,18 @@ h1 {
 #botonReiniciar {
   padding: 10px 20px;
   font-size: 1em;
-  background-color: #e57373;
+  background-color: #ce93d8;
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  margin-bottom: 10px;
 }
 
 #botonReiniciar:hover {
-  background-color: #d32f2f;
+  background-color: #ab47bc;
 }
 
-/* Contador de avance */
 #avance {
   margin-top: 10px;
   font-weight: bold;
-  color: #4a148c;
 }
