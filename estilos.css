@@ -9,7 +9,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #eeb1f2;
+  background-color: #D3D3D3;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -30,7 +30,7 @@ h1 {
 }
 
 .semestre {
-  background-color: Lavender Pink;
+  background-color: Light Gray;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 12px;
