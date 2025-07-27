@@ -9,7 +9,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #FAFAFA; /* Gris muy claro casi blanco */
+  background-color: #FAFAFA; /* Gris casi blanco */
   margin: 0;
   padding: 0;
   text-align: center;
@@ -37,7 +37,6 @@ h1 {
   min-width: 220px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-
 
 .semestre h2 {
   margin-top: 0;
