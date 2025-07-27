@@ -1,16 +1,17 @@
 :root {
-  --color-fundacion: #e0c3fc;     /* Morado pastel claro */
-  --color-disciplinar: #d5aaff;   /* Lavanda claro */
-  --color-optativa: #e5d0ff;      /* Lila pastel */
-  --color-libre: #f3e1ff;         /* Rosa-morado suave */
-  --color-trabajo: #d0b3ff;       /* Malva pastel */
-  --color-bloqueado: #ddd;
-  --color-aprobado: #b2dfdb;      /* Verde suave */
+  --color-fundacion: #E0BBE4;      /* Lavanda claro */
+  --color-disciplinar: #DCC6E0;    /* Lila suave */
+  --color-libre: #CBAACB;          /* Morado pastel */
+  --color-trabajo: #B5AED7;        /* Morado grisáceo */
+  --color-bloqueado: #EDE7F6;      /* Lavanda muy claro */
+  --color-aprobado: #CE93D8;       /* Morado claro más intenso */
+  --color-fondo: #f5ebf7;          /* Fondo general */
+  --color-semestre: #ffffff;       /* Fondo columna semestre */
 }
 
 body {
   font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  background: var(--color-fondo);
   margin: 0;
   padding: 0;
   text-align: center;
@@ -18,6 +19,7 @@ body {
 
 h1 {
   margin: 20px 0;
+  color: #4a148c;
 }
 
 #malla-container {
@@ -30,38 +32,42 @@ h1 {
 }
 
 .semestre {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  background: var(--color-semestre);
+  border: 1px solid #d1c4e9;
+  border-radius: 12px;
   padding: 10px;
-  min-width: 200px;
+  min-width: 220px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.semestre h3 {
-  margin-top: 0;
-  font-size: 1.2em;
+.semestre h2 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #6a1b9a;
 }
 
 .ramo {
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  padding: 6px;
-  margin: 6px 0;
+  border: 1px solid #b39ddb;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
+  color: #212121;
 }
 
-/* Colores por tipo */
+.ramo:hover {
+  transform: scale(1.02);
+}
+
+/* Tipos de asignatura */
 .fundacion {
   background-color: var(--color-fundacion);
 }
 
 .disciplinar {
   background-color: var(--color-disciplinar);
-}
-
-.optativa {
-  background-color: var(--color-optativa);
 }
 
 .libre {
@@ -72,23 +78,27 @@ h1 {
   background-color: var(--color-trabajo);
 }
 
+/* Estados */
 .bloqueado {
   background-color: var(--color-bloqueado) !important;
   color: #999;
   cursor: not-allowed;
+  border-style: dashed;
 }
 
 .aprobado {
   background-color: var(--color-aprobado) !important;
   text-decoration: line-through;
+  color: white;
 }
 
+/* Botón de reinicio */
 #footer {
   margin: 20px;
 }
 
 #botonReiniciar {
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-size: 1em;
   background-color: #e57373;
   border: none;
@@ -102,7 +112,9 @@ h1 {
   background-color: #d32f2f;
 }
 
+/* Contador de avance */
 #avance {
   margin-top: 10px;
   font-weight: bold;
+  color: #4a148c;
 }
